@@ -7,6 +7,11 @@ work now as most of the others were lacking features, or not being
 maintained. This project was also used as a learning experience for me
 to learn more about testing and CI.
 
+Currently this code is being used but is in its very early stages.  I
+would consider this a working alpha. As it is put into production and
+used I will change this to a production release, I just want to get some
+more testing under its belt.  
+
 Thanks
 ------
 
