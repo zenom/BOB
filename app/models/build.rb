@@ -18,7 +18,6 @@ class Build
   before_create :generate_buildnum
   after_destroy :remove_build_dir
 
-
   # on state change, handle running hooks
   stateflow do
     initial :pending
@@ -151,6 +150,10 @@ class Build
   def steps_completed
     done = build_steps.where(:state => 'success').count
     (done - 1)
+  end
+
+  def latest_commit
+    commits.last
   end
 
   class << self

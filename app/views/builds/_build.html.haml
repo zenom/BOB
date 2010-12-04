@@ -24,7 +24,10 @@
       = build.completed_at
       %br/
       %strong Commit:
-      = build.commits.present? ? build.commits.last.guid : "waiting"
+      - if build.latest_commit.url.nil?
+        = build.latest_commit.guid
+      - else
+        = link_to build.latest_commit.guid, build.latest_commit.url
     %div.small.right
       %strong ID:
       = build.id

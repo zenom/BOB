@@ -20,5 +20,5 @@ class Service::Github
     end
     commits
   end
-  
+
 end

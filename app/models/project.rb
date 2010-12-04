@@ -53,5 +53,4 @@ class Project
     (fail_count.to_f / total.to_f) * 100
   end
        
-
 end

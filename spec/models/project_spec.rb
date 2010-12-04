@@ -25,7 +25,6 @@ describe Project do
     it { project.name.should_not be_nil }
     it { project.scm_type.should eql 'Bob::Git' }
     it { project.steps.count.should eql 4 }
-    
   end
 
   context "building a project" do
