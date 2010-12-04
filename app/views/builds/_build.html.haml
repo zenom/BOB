@@ -24,7 +24,7 @@
       = build.completed_at
       %br/
       %strong Commit:
-      = build.commits.present? ? build.commits.first.guid : "waiting"
+      = build.commits.present? ? build.commits.last.guid : "waiting"
     %div.small.right
       %strong ID:
       = build.id
@@ -36,7 +36,7 @@
       = (build.steps_completed > 0) ? build.steps_completed : 'waiting'
       %br/
       %strong Message:
-      = build.commits.present? ? build.commits.first.message : "waiting"
+      = build.commits.present? ? build.commits.last.message : "waiting"
 
   .bendl
   .bendr
