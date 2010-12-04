@@ -5,4 +5,4 @@ test:
   domain: localhost
 
 production:
-  domain: example.com
+  domain: example.com 
