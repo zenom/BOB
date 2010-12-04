@@ -74,7 +74,6 @@ GEM
     ffaker (1.0.0)
     ffi (0.6.3)
       rake (>= 0.8.7)
-    git (1.2.5)
     growl (1.0.3)
     guard (0.2.2)
       open_gem (~> 1.4.2)
@@ -104,8 +103,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mocha (0.9.10)
-      rake
     mongo (1.1.4)
       bson (>= 1.1.1)
     mongoid (2.0.0.beta.20)
@@ -205,7 +202,6 @@ DEPENDENCIES
   delayed_job_mongoid
   fabrication
   ffaker
-  git
   growl
   guard-rspec
   haml
@@ -214,7 +210,6 @@ DEPENDENCIES
   hirb
   jquery-rails
   launchy
-  mocha
   mongoid (= 2.0.0.beta.20)
   mongoid-rspec
   open4

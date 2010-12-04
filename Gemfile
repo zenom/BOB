@@ -15,7 +15,6 @@ gem 'stateflow'
 gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
-gem 'git'
 
 # Future
 #gem 'devise' 
@@ -38,9 +37,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'rspec'
   gem 'rspec-rails'
-  #gem 'webmock'
-  #gem 'vcr'
   gem 'database_cleaner', :git => 'git://github.com/bmabey/database_cleaner.git'
   gem 'akephalos'
-  gem "mocha"
+  #gem "mocha"
 end
