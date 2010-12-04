@@ -1,0 +1,14 @@
+%tr{:id => "project_#{project.id}"}
+  %td= project.name
+  %td= project.scm_path
+  %td= project.branch_name
+  %td.center= project.total_builds
+  %td.center= (project.total_builds > 0) ? number_to_percentage(project.fail_rate, :precision => 0) : "n/a"
+  %td
+    = image_tag(Notifier::Campfire.icon, :width => 16, :height => 16, :alt => 'Campfire', :title => 'Campfire') if project.campfire.post_message?
+  %td.actions
+    = link_to "Build", build_project_path(project)
+    |
+    = link_to "Edit", edit_project_path(project)
+    |
+    = link_to "Delete", project_path(project), :confirm => "Are you sure?", :method => :delete

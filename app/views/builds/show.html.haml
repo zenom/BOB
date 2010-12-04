@@ -1,0 +1,13 @@
+- @build.build_steps.asc(:started_at).each do |step|
+  .block
+    .block_head
+      .bheadl
+      .bheadr
+      %h2= step.name
+    .block_content
+      - if step.success? or step.failed?
+        .pre= step.clean_output.html_safe
+      - else
+        .pre= "...building..."
+    .bendl
+    .bendr

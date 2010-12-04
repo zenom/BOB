@@ -1,0 +1,7 @@
+
+if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
+  && -s "${rvm_path:-$HOME/.rvm}/environments/ree-1.8.7-head@bob" ]] ; then
+  \. "${rvm_path:-$HOME/.rvm}/environments/ree-1.8.7-head@bob"
+else
+  rvm --create  "ree-1.8.7-head@bob"
+fi

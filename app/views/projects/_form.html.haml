@@ -1,0 +1,91 @@
+- if project.errors.any?
+  .block
+    .block_head
+      .bheadl
+      .bheadr
+      %h2 ERRORS
+    .block_content
+      #error_explanation
+        %h2= "#{pluralize(project.errors.count, "error")} prohibited this project from being saved:"
+        %ul
+          - project.errors.full_messages.each do |msg|
+            %li= msg
+    .bendl
+    .bendr
+
+= simple_form_for project do |f|
+  .block.small.left
+    .block_head
+      .bheadl
+      .bheadr
+      %h2
+        = form_name
+        = " - " unless @project.new_record?
+        = link_to "BUILD", build_project_path(project) unless @project.new_record?
+      %span.ajax-loading
+      %ul
+        %li
+          /= link_to "Add Source", new_project_path unless new_record?
+    / .block_head ends
+    .block_content
+      = f.input :name, :input_html => {:class => :text }
+      %p
+      = f.input :scm_path, :input_html => {:class => :text }
+      %p
+      = f.input :branch_name, :input_html => {:class => :text }
+      %p
+      = f.input :keep_build_count, :input_html => {:class => :text }
+      %p
+      = f.check_box :fixed_branch, :class => :checkbox
+      = f.label :fixed_branch
+      %p
+      %h3
+        = image_tag('notifications/campfire.png', :width => 16, :height => 16) 
+        Campfire
+        = f.simple_fields_for :campfire do |cf|
+          = cf.input :token, :input_html => {:class => :text}
+          %p 
+          = cf.input :room, :input_html => {:class => :text}
+          %p 
+          = cf.input :subdomain, :input_html => {:class => :text}
+          %p 
+          = cf.check_box :ssl, :class => :checkbox
+          = cf.label :ssl
+
+      %p 
+      = f.button :submit, :class => "submit mid"
+      %p
+    .bendl
+    .bendr
+
+  .block.small.right
+    .block_head
+      .bheadl
+      .bheadr
+      %h2= "Build Steps"
+    .block_content
+      = f.simple_fields_for :steps do |steps|
+        %div.step{:id => steps.object.id.to_s}
+          .step-form
+            = steps.input :name, :input_html => {:class => :text}
+            .pre
+            = steps.error :command
+            = steps.label :command, :required => true
+            = steps.text_area :command, :class => :command 
+          = link_to "Remove Step", @project.new_record? ? '#' : delete_step_path(project, :step => steps.object.id), :class => :delete_step
+          %hr
+      %input{:type => 'button', :value => 'New Step', :class => 'submit mid addstep'} 
+      %p
+    .bendl
+    .bendr
+
+:javascript
+    $(function() {
+      /* loop through commands on load and format them */
+      $('.command').each(function() {
+        command     = $(this).val().split(/\r\n|\r|\n/);
+        parent_div  = $(this).parent().parent();
+        pre_area    = parent_div.find('.pre:first');
+        pre_area.html(command.join(' && '));
+      });
+    });

@@ -1,0 +1,8 @@
+development:
+  domain: lvh.me:3000
+
+test:
+  domain: lvh.me:3000
+
+production:
+  domain: example.com

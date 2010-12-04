@@ -1,0 +1,74 @@
+{
+  "after": "353d9c17b49526f1ae356d2e80a22e195909c240", 
+  "before": "6539ba9bd5b8556dbdaa3331eaa0a9ba87fa94e5", 
+  "commits": [
+    {
+      "added": [
+        "app\/controllers\/service_controller.rb", 
+        "app\/helpers\/service_helper.rb"
+      ], 
+      "author": {
+        "email": "andy@conspyre.com", 
+        "name": "Andy Holman", 
+        "username": "zenom"
+      }, 
+      "id": "4885deef39235577eaf5968370b29bca12709e0c", 
+      "message": "Commit #1", 
+      "modified": [
+        "app\/models\/project.rb", 
+        "config\/routes.rb"
+      ], 
+      "removed": [], 
+      "timestamp": "2010-11-30T19:14:03-08:00", 
+      "url": "https:\/\/github.com\/zenom\/bob\/commit\/4885deef39235577eaf5968370b29bca12709e0c"
+    }, 
+    {
+      "added": [
+        "spec\/controllers\/service_controller_spec.rb", 
+        "spec\/helpers\/service_helper_spec.rb"
+      ], 
+      "author": {
+        "email": "andy@conspyre.com", 
+        "name": "Andy Holman", 
+        "username": "zenom"
+      }, 
+      "id": "353d9c17b49526f1ae356d2e80a22e195909c240", 
+      "message": "commit #2", 
+      "modified": [
+        "Gemfile", 
+        "Gemfile.lock"
+      ], 
+      "removed": [], 
+      "timestamp": "2010-11-30T19:14:21-08:00", 
+      "url": "https:\/\/github.com\/zenom\/bob\/commit\/353d9c17b49526f1ae356d2e80a22e195909c240"
+    }
+  ], 
+  "compare": "https:\/\/github.com\/zenom\/bob\/compare\/6539ba9...353d9c1", 
+  "forced": false, 
+  "pusher": {
+    "email": "andy@conspyre.com", 
+    "name": "zenom"
+  }, 
+  "ref": "refs\/heads\/master", 
+  "repository": {
+    "created_at": "2010\/11\/30 17:20:02 -0800", 
+    "description": "Builder project based on integrity, bigtuna, cijoe.", 
+    "fork": false, 
+    "forks": 0, 
+    "has_downloads": true, 
+    "has_issues": true, 
+    "has_wiki": true, 
+    "homepage": "", 
+    "name": "bob", 
+    "open_issues": 0, 
+    "owner": {
+      "email": "andy@conspyre.com", 
+      "name": "zenom"
+    }, 
+    "private": true, 
+    "pushed_at": "2010\/11\/30 19:14:27 -0800", 
+    "url": "https:\/\/github.com\/zenom\/bob", 
+    "watchers": 2
+  }
+}
+
