@@ -7,6 +7,14 @@ work now as most of the others were lacking features, or not being
 maintained. This project was also used as a learning experience for me
 to learn more about testing and CI.
 
+Thanks
+------
+
+I want to thank the guys who wrote BigTuna, CIJoe, Signal, Integrity
+etc., because not only did you guys inspire me to write my own, but also
+for open sourcing your code, so guys like me can learn and build his own
+  CI tool. 
+
 Setup
 -----
 
