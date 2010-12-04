@@ -9,6 +9,11 @@ class Runner
     ]
     # auto source the rvmrc if one exists in the dir
     commands.insert(1,"source .rvmrc") if File.exists?(File.join(dir, '.rvmrc'))
+
+    # auto source a .bobrc file if one exists in the dir
+    commands.insert(1,"source .bobrc") if File.exists?(File.join(dir,
+    '.bobrc'))
+
     output = ''
     error = []
     command = commands.join(' && ')

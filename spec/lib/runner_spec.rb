@@ -16,6 +16,13 @@ describe Runner do
       end
     end
 
+    it "should source a .bobrc file" do
+      `echo 'echo BOBRC' > /tmp/.bobrc` 
+      output = Runner.run('/tmp', 'cd /tmp')
+      output.should include('BOBRC')
+      FileUtils.rm('/tmp/.bobrc')
+    end
+
   end
 
 end
