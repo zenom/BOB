@@ -27,7 +27,8 @@
       - if build.latest_commit.url.nil?
         = build.latest_commit.guid
       - else
-        = link_to build.latest_commit.guid, build.latest_commit.url
+        = link_to build.latest_commit.guid, build.latest_commit.url,
+        :target => :_blank
     %div.small.right
       %strong ID:
       = build.id
