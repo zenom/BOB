@@ -75,7 +75,9 @@ class Build
   end
 
   def generate_buildnum
-    self.build_num = Build.count
+    deleted = Build.deleted.count
+    current = Build.count
+    build_num = (deleted + current) + 1
   end
 
   def associate_commits
