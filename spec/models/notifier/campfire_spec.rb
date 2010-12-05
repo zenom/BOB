@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Notifier::Campfire do
 
   it { should have_field(:ssl).of_type(Boolean) }
+  it { should have_field(:token).of_type(String) }
+  it { should have_field(:room).of_type(String) }
+  it { should have_field(:subdomain).of_type(String) }
+  it { should be_embedded_in(:project).as_inverse_of(:campfire) }
 
   before(:each) do
     @build = Fabricate(:build, :state => :building)

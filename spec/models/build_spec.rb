@@ -15,7 +15,7 @@ describe Build do
       build_testrepo
       @project  = Fabricate(:project)
       @build    = Fabricate(:build, :project => @project)
-      @build.project.campfire.should_receive(:send_success)
+      @build.should_receive(:successful_build)
       @build.perform
     end
 
@@ -52,7 +52,7 @@ describe Build do
       bad_step  = Fabricate.build(:step, :name => "Bad Step", :command => 'lkjasdfklasdf')
       @project  = Fabricate(:project, :steps => [bad_step])
       @build    = Fabricate(:build, :project => @project)
-      @build.project.campfire.should_receive(:send_failed)
+      @build.should_receive(:failed_build)
       @build.perform
     end
 
