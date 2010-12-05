@@ -1,24 +1,25 @@
 Bob (the Builder)
 =================
 
-BOB is a tool I have wanted to write for sometime and the introduction
-of BigTuna really pushed me to do it.  This is a build tool we use at
-work now as most of the others were lacking features, or not being
-maintained. This project was also used as a learning experience for me
-to learn more about testing and CI.
+BOB (the builder) was written becaus I wanted to experience writing an
+open source application.  BigTuna recently came out which is a great CI
+as well, and I liked many of the things they had done. Some of that can
+also be seen here in BOB but slightly different. We have now switched to
+BOB at work and it is running builds on 3 different applications
+conistently, with no issues. 
 
 Currently this code is being used but is in its very early stages.  I
-would consider this a working alpha. As it is put into production and
-used I will change this to a production release, I just want to get some
-more testing under its belt.  
+would consider this a working alpha. As soon as I let BOB run for a
+couple weeks I will release it as a production release once I am certain
+major bugs are not in the code.
 
 Thanks
 ------
 
 I want to thank the guys who wrote BigTuna, CIJoe, Signal, Integrity
-etc., because not only did you guys inspire me to write my own, but also
-for open sourcing your code, so guys like me can learn and build his own
-  CI tool. 
+etc., because not only did you guys inspire me to write my own, but
+looking through your code taught me a lot.  I still have a lot more to
+learn but it was a great learning experience for me. 
 
 Setup
 -----
@@ -32,7 +33,21 @@ From here just go into the web interface and add a new project. You can
 create as many build steps as you wish and keep each step organized a
 little nicer.  
 
-Notiifcations
+RVM
+--- 
+
+If you use rvm and maintain an .rvmrc in your project directory, BOB
+will automatically source this file so you don't have to source it in
+your build steps.
+
+.bobrc
+------
+
+If for whatever reason you need to run some commands but don't want them
+to show up in your build steps, you can add them to a .bobrc file and it
+will be automatically sourced.  
+
+Notifications
 -------------
 
 Right now the only notifications BOB offers is Campfire although more
