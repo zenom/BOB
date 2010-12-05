@@ -2,6 +2,6 @@ class DashboardsController < ApplicationController
   
   # Show all the builds
   def index
-    @builds = Build.desc(:created_at, :started_at).limit(20)
+    @builds = Build.desc(:build_num).limit(20)
   end
 end

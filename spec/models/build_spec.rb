@@ -37,6 +37,11 @@ describe Build do
     it "should respond to success?" do 
       @build.should be_success
     end
+
+    it "latest_commit" do
+      @build.commits.last.should eql @build.latest_commit 
+    end
+
   end
 
 

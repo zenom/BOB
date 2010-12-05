@@ -21,7 +21,7 @@ class BuildsController < ApplicationController
 
   def latest_builds
     if params[:id] == 'undefined'
-      @builds = Build.desc(:created_at)
+      @builds = Build.desc(:build_num)
     else
       build = Build.find(params[:id])
       @builds = Build.where(:build_num.gt => build.build_num).desc(:created_at)
