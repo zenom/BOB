@@ -1,6 +1,0 @@
-desc "Run all specs with rcov"
-RSpec::Core::RakeTask.new(:rcov => spec_prereq) do |t|
-  t.pattern = 'spec/**/*_spec.rb'    
-  t.rcov = true
-  t.rcov_opts = %w{--rails --exclude osx\/objc,gems\/,spec\/}
-end

@@ -29,8 +29,9 @@ Setup
 1. Clone the repository.
 2. Modify config/mongoid.yml to your liking. (Make sure to set
    Environment vars for production user, pass, host, database name.
-3. Set it up via nginx, etc.
-4. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
+3. Modify config/app_config.yml to setup your domains.
+4. Set it up via nginx, etc.
+5. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
 
 From here just go into the web interface and add a new project. You can
 create as many build steps as you wish and keep each step organized a

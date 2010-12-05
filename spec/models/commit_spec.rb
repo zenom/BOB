@@ -28,5 +28,9 @@ describe Commit do
       commit.guid.should_not be_nil
     end
 
+    it 'should count files removed' do
+      commit.files_removed.should eql 0
+    end
+
   end
 end
