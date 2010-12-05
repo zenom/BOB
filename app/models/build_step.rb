@@ -51,4 +51,9 @@ class BuildStep
     output.gsub("\n", "<br>").gsub("\e[0m", '</span>').gsub(/\e\[(\d+)m/, "<span class=\"color\\1\">")
   end
 
+  def really_clean_output
+    output.gsub(/\e\[.+?m/, '').strip
+  end
+  
+
 end

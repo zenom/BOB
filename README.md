@@ -30,7 +30,7 @@ Setup
 2. Modify config/mongoid.yml to your liking. (Make sure to set
    Environment vars for production user, pass, host, database name.
 3. Modify config/app_config.yml to setup your domains.
-4. Set it up via nginx, etc.
+4. Set up your nginx, apache, thin etc. server for the CI codebase. 
 5. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
 
 From here just go into the web interface and add a new project. You can
@@ -43,6 +43,9 @@ RVM
 If you use rvm and maintain an .rvmrc in your project directory, BOB
 will automatically source this file so you don't have to source it in
 your build steps.
+
+Otherwise to run the build in a specific environment, you can do
+something like the following in one of your first build steps:  `source /home/user/.rvm/environments/ruby@gemset`
 
 .bobrc
 ------
