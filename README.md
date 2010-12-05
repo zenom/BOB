@@ -13,6 +13,8 @@ would consider this a working alpha. As soon as I let BOB run for a
 couple weeks I will release it as a production release once I am certain
 major bugs are not in the code.
 
+Currently the code is tested on REE 1.8.7 & 1.9.2-p0.
+
 Thanks
 ------
 
