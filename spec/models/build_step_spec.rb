@@ -13,6 +13,7 @@ describe BuildStep do
     before(:each) do
       @project  = Fabricate(:project)
       @build    = Fabricate(:build, :project => @project)
+      @build.should_receive(:failed_build)
       @build.perform
       @build_steps = @build.build_steps
     end
@@ -27,6 +28,7 @@ describe BuildStep do
         :command => 'rspec spec/models/build_spec.rb')
       @project  = Fabricate(:project, :steps => [step])
       @build    = Fabricate(:build, :project => @project)
+      @build.should_receive(:failed_build)
       @build.perform
       @build_steps = @build.build_steps
     end

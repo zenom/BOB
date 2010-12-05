@@ -6,4 +6,5 @@ Fabricator(:project) do
   fixed_branch        { false }
   branch_name         { 'master' }
   steps(:count => 4)  { |project, i| Fabricate.build(:step) }
+  campfire            { Fabricate.build(:campfire) }
 end

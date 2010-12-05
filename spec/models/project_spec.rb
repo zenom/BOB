@@ -44,6 +44,7 @@ describe Project do
     it 'perform should work properly' do
       build = Fabricate(:build, :project => project)
       project.steps.count.should eql 4
+      build.project.campfire.should_receive(:send_failed)
       build.perform
       project.steps.count.should eql 4 
     end

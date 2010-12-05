@@ -60,7 +60,6 @@ class Build
   def failed_build
     self.update_attributes(:completed_at => Time.now.utc)
 
-    return if Rails.env == 'test'
     # do the hooks
     self.project.campfire.send_failed(self) if self.project.campfire.post_message?
   end
@@ -69,7 +68,6 @@ class Build
     # Hook needs moved
     self.update_attributes(:completed_at => Time.now.utc)
 
-    return if Rails.env == 'test'
     # do the hooks
     self.project.campfire.send_success(self) if self.project.campfire.post_message?
   end
