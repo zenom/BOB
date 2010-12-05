@@ -23,5 +23,10 @@ describe Commit do
     it "should not be nil" do
       commit.should_not be_nil
     end
+
+    it 'should have a guid' do
+      commit.guid.should_not be_nil
+    end
+
   end
 end
