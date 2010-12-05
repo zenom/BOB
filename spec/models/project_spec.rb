@@ -63,7 +63,6 @@ describe Project do
         project.builds.count.should eql 1
         # the first build should have the 2 commits we added
         project.builds.first.commits.count.should eql 2
-        project.builds.count.should eql 1
       end
     end
   end

@@ -7,7 +7,7 @@ describe ServiceController do
 
     before(:each) do 
       @github = ''
-      f = File.open(File.join(Rails.root, 'spec', 'mocks', 'services', 'github.json'))
+      f = File.open(Rails.root + 'spec/mocks/services/github.json')
       f.each_line do |line|
         @github += line
       end

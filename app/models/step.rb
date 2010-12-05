@@ -10,10 +10,6 @@ class Step
   validates_presence_of :name, :command
 
   def formatted_command
-    commands = []
-    self.command.each_line do |line|
-      commands << line.strip
-    end
-    commands.join(' && ')
+    self.command.split("\n").map(&:strip).join(' && ')
   end
 end

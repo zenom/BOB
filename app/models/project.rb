@@ -37,20 +37,15 @@ class Project
   end
 
   def total_builds
-    active = builds.count
-    deleted = builds.deleted.count
-    active + deleted
+    (builds.count + builds.deleted.count)
   end
 
   def fail_rate
     failed_deleted = builds.deleted.where(:state => 'failed').count
     failed  = builds.where(:state => 'failed').count 
-    deleted = builds.deleted.count    
-    active = builds.count
 
-    total = deleted + active
     fail_count = failed_deleted + failed
-    (fail_count.to_f / total.to_f) * 100
+    (fail_count.to_f / total_builds.to_f) * 100
   end
        
 end
