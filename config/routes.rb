@@ -10,11 +10,6 @@ Bob::Application.routes.draw do
   match "/build/:id/status", :to => "builds#build_status", :as => :build_status
   match "/build/:id/since", :to => "builds#latest_builds", :as => :latest_builds
 
-  #match "/projects/:id/build", :controller => :projects, :action => :build, :as => :build_project
-  #match "/projects/:id/delete_step", :controller => :projects, :action => :delete_step, :as => :delete_step
-  #match "/build/:id/status", :controller => :builds, :action => :build_status, :as => :build_status
-  #match "/build/:id/since", :controller => :builds, :action => :latest_builds, :as => :latest_builds
-
   resources :service do
     post 'github'
   end
