@@ -25,7 +25,8 @@ Setup
 -----
 
 1. Clone the repository.
-2. Modify config/mongoid.yml to your liking.
+2. Modify config/mongoid.yml to your liking. (Make sure to set
+   Environment vars for production user, pass, host, database name.
 3. Set it up via nginx, etc.
 4. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
 
