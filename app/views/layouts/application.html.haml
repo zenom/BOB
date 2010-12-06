@@ -45,8 +45,8 @@
         
         - [:error, :warning, :notice, :info].each do |msg_type|
           = render :partial => "layouts/flash", :locals => {:msg_type => msg_type, :flash => flash} unless flash[msg_type.to_sym].blank?
-
-        = yield
+        #builds
+          = yield
         
         #footer
       / wrapper ends
