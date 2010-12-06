@@ -1,5 +1,7 @@
 Bob::Application.routes.draw do
 
+  devise_for :users
+
   resources :dashboards
   resources :projects
   resources :builds

@@ -20,6 +20,7 @@ class BuildsController < ApplicationController
   end
 
   def latest_builds
+    project = params[:project].blank? ? nil : params[:project]
     if params[:id] == 'undefined'
       @builds = Build.desc(:build_num)
     else

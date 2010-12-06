@@ -1,6 +1,7 @@
 class Project
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
   field   :name,              :type => String
   field   :scm_type,          :type => String,  :default => 'Bob::Git'
@@ -8,6 +9,7 @@ class Project
   field   :keep_build_count,  :type => Integer, :default => 10 
   field   :fixed_branch,      :type => Boolean, :default => false
   field   :branch_name,       :type => String,  :default => 'master'
+  slug    :name
 
   index :branch_name
   index :scm_path

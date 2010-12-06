@@ -5,6 +5,7 @@ gem 'rails', '3.0.3'
 gem 'haml'
 gem 'haml-rails'
 gem 'mongoid', '2.0.0.beta.20'
+gem 'mongoid_slug', :require => 'mongoid/slug'
 gem 'bson_ext', '1.1.4'
 gem 'delayed_job'
 gem 'delayed_job_mongoid'
@@ -15,11 +16,9 @@ gem 'stateflow'
 gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
+gem 'devise'
 
-# Future
-#gem 'devise' 
 #gem 'cancan'
-#pivotal tracker integration?
 
 group :development, :test do
   gem 'rails_best_practices'

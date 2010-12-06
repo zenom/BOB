@@ -1,0 +1,21 @@
+- @builds.each do |build|
+  = render build
+
+:javascript
+  setInterval(function() {
+    $('.block.pending, .block.building').each(function() {
+      id = $(this).attr('id');
+      block = $(this);
+      
+      $.get('/build/' + id + '/status', function(data) {
+        block.replaceWith(data); 
+      });
+
+    });
+
+    var id = $('.block').first().attr('id');
+    // also look for newer builds not triggered by us
+    $.get('/build/' + id + '/since', {project: '#{escape_javascript(@slug)}'}, function(data) {
+      $('#' + id).before(data);
+    });
+  },10000);
