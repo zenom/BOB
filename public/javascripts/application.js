@@ -1,7 +1,22 @@
 $(function() {
   
   // message.notice needs to be removed on a timer.
-  
+
+  window.renderTemplate = function(temp_path, vars) {
+    var result = '';
+    tmpl_result = '';
+
+    $.ajax({
+      url: temp_path,
+      async: false,
+      success: function(data) {
+        options = {locals: vars};
+        result = Haml.render(data, options);
+      }
+    });
+    return result;
+e };
+
   $('.command').live('keyup', function() {
     command     = $(this).val().split(/\r\n|\r|\n/);
     parent_div  = $(this).parent().parent();

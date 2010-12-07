@@ -18,17 +18,9 @@ class BuildsController < ApplicationController
 
   def latest_builds
     @builds = Build.desc(:build_num)
-
-    begin
-      if params[:id]
-        project = Project.where(:slug => params[:id]).first
-        @builds.where(:project_id => project.id)
-      end
-    rescue
-      project = nil
+    respond_to do |format|
+      format.json { render :json => @builds.to_a.to_json }
     end
-
-    project.nil? ? render(:text => "Not Found", :status => 404) :  render(:layout => false)
   end
 
   def find_build

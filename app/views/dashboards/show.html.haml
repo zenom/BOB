@@ -1,11 +1,2 @@
 - @builds.each do |build|
   = render build
-
-:javascript
-  setInterval(function() {
-    slug = '#{escape_javascript(@slug)}';
-    $.get('/builds/list/' + slug, function(data) {
-      $('#builds').html(data);
-    });
-
-  },10000);

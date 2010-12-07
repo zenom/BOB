@@ -3,9 +3,10 @@
 
 :javascript
   setInterval(function() {
-
-    $.get('/builds/list', function(data) {
-      $('#builds').html(data);
+    $.get('/list', function(data) {
+      $.each(data, function(i, build) {
+        template = renderTemplate('javascripts/templates/build.js.haml', build);
+        $('#builds').append(template);
+      });
     });
-
   },10000);
