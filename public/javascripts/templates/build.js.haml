@@ -1,3 +1,50 @@
-#home
-  %h2 HOME
-  = build_num
+.block{id: id, class: state}
+  .block_head
+    .bheadl
+    .bheadr
+    %h2= project_name
+    %span.ajax-loading
+    %ul
+      %li
+        %a{href: '/projects/' + project_slug + '/edit'}
+          Edit Project
+      %li
+        %a{href: '/builds/' + id}
+          Details
+      %li
+        %a{href: '/builds/' + id, data-confirm: 'Are you sure?', data-method: 'delete'}
+          Delete
+  .block_content
+    %div.small.left
+      %strong Queued:
+      = " " + created_at
+      %br/
+      %strong Started:
+      = " " + started_at
+      %br/
+      %strong Completed:
+      = " " + completed_at
+      %br/
+      %strong Commit:
+      = " " 
+      :if commit_url == commit_id
+        = commit_id
+      :if commit_url != commit_id
+        %a{href: commit_url}
+          = commit_id
+
+    %div.small.right
+      %strong ID:
+      = " " + id + " (" + build_num + ")"
+      %br/
+      %strong Build Steps:
+      = " " + total_steps
+      %br/
+      %strong Steps Completed:
+      = " " + steps_completed 
+      %br/
+      %strong Message: 
+      = " " + commit_message
+      
+  .bendl
+  .bendr

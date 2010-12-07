@@ -1,12 +1,22 @@
-- @builds.each do |build|
-  = render build
-
 :javascript
-  setInterval(function() {
+  load_builds = function() {
+    clearInterval();
     $.get('/list', function(data) {
       $.each(data, function(i, build) {
         template = renderTemplate('javascripts/templates/build.js.haml', build);
-        $('#builds').append(template);
+        div_tag = $('#' + build.id);
+        if(div_tag.length == 0) {
+          $('#builds').after(template);
+        } else {
+          div_tag.replaceWith(template);
+        }
       });
     });
-  },10000);
+  }
+  var timerStarted;
+
+  if(timerStarted == undefined) {
+    load_builds();
+    timerStarted = setInterval(load_builds, 3000);
+  }
+

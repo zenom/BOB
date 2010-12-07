@@ -19,7 +19,7 @@ class BuildsController < ApplicationController
   def latest_builds
     @builds = Build.desc(:build_num)
     respond_to do |format|
-      format.json { render :json => @builds.to_a.to_json }
+      format.json { render :json => @builds.as_json }
     end
   end
 

@@ -156,6 +156,28 @@ class Build
     commits.last
   end
 
+  def as_json(options={})
+    completed_steps = (steps_completed <= 0) ? 'waiting' : steps_completed
+    commit_id = self.latest_commit.nil? ?  "waiting" : self.latest_commit.guid
+    commit_url = self.latest_commit.url.nil? ? latest_commit.guid : latest_commit.url
+    {
+      :id => self.id,
+      :build_num => self.build_num,
+      :project_name => self.project.name,
+      :project_id => self.project.id,
+      :project_slug => self.project.slug,
+      :commit_message => self.commits.first.message,
+      :state => self.state,
+      :completed_at => self.completed_at.strftime("%m/%d/%Y %H:%I %p"),
+      :created_at => self.created_at.strftime("%m/%d/%Y %H:%I %p"),
+      :started_at => self.started_at.strftime("%m/%d/%Y %H:%I %p"),
+      :commit_id => self.commits.first.guid,
+      :total_steps => self.project.steps.count,
+      :steps_completed => completed_steps,
+      :commit_url => commit_url
+    }
+  end
+
   class << self
     def clean_old_builds(project)
       project = Project.find(project)
