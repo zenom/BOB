@@ -17,7 +17,8 @@ class BuildsController < ApplicationController
   end
 
   def latest_builds
-    @builds = Build.desc(:build_num)
+    @builds = Build.asc(:build_num).limit(10)
+    ap @builds.count
     respond_to do |format|
       format.json { render :json => @builds.as_json }
     end

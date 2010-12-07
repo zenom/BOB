@@ -2,18 +2,25 @@ $(function() {
   
   // message.notice needs to be removed on a timer.
 
+  window.templates = {};
   window.renderTemplate = function(temp_path, vars) {
     var result = '';
     tmpl_result = '';
 
-    $.ajax({
-      url: temp_path,
-      async: false,
-      success: function(data) {
-        options = {locals: vars};
-        result = Haml.render(data, options);
-      }
-    });
+    if(templates[temp_path]) {
+      options = {locals: vars};
+      result = Haml.render(templates[temp_path], options);
+    } else {
+      $.ajax({
+        url: temp_path,
+        async: false,
+        success: function(data) {
+          options = {locals: vars};
+          templates[temp_path] = data;
+          result = Haml.render(data, options);
+        }
+      });
+    }
     return result;
 e };
 

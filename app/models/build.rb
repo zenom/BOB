@@ -159,19 +159,29 @@ class Build
   def as_json(options={})
     completed_steps = (steps_completed <= 0) ? 'waiting' : steps_completed
     commit_id = self.latest_commit.nil? ?  "waiting" : self.latest_commit.guid
-    commit_url = self.latest_commit.url.nil? ? latest_commit.guid : latest_commit.url
+
+    if self.commits.count > 0
+      commit_url = self.latest_commit.url.nil? ? latest_commit.guid : latest_commit.url
+      commit_message = self.latest_commit.message.nil? ? 'waiting' : latest_commit.message  
+      commit_guid = self.latest_commit.guid.nil? ? 'waiting' : latest_commit.guid
+    end
+   
+    started = self.started_at.nil? ? "waiting" : self.started_at.strftime("%m/%d/%Y %H:%I %p")
+    completed = self.completed_at.nil? ? "waiting" : self.completed_at.strftime("%m/%d/%Y %H:%I %p")
+    created = self.created_at.nil? ? "waiting" : self.created_at.strftime("%m/%d/%Y %H:%I %p")
+
     {
       :id => self.id,
       :build_num => self.build_num,
       :project_name => self.project.name,
       :project_id => self.project.id,
       :project_slug => self.project.slug,
-      :commit_message => self.commits.first.message,
+      :commit_message => commit_message,
       :state => self.state,
-      :completed_at => self.completed_at.strftime("%m/%d/%Y %H:%I %p"),
-      :created_at => self.created_at.strftime("%m/%d/%Y %H:%I %p"),
-      :started_at => self.started_at.strftime("%m/%d/%Y %H:%I %p"),
-      :commit_id => self.commits.first.guid,
+      :completed_at => completed,
+      :created_at => created,
+      :started_at => started,
+      :commit_id => commit_guid,
       :total_steps => self.project.steps.count,
       :steps_completed => completed_steps,
       :commit_url => commit_url

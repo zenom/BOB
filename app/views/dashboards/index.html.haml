@@ -4,19 +4,33 @@
     $.get('/list', function(data) {
       $.each(data, function(i, build) {
         template = renderTemplate('javascripts/templates/build.js.haml', build);
+        template = $(template).hide();
         div_tag = $('#' + build.id);
         if(div_tag.length == 0) {
           $('#builds').after(template);
+          $(template).fadeIn('slow');
         } else {
+          $(template).show();
           div_tag.replaceWith(template);
         }
+
+        var keep = data.length;
+        console.log('Keeping ' + keep + ' builds...');
+        $('.block').each(function(i, block) {
+          if(i >= keep) {
+            $(this).last().fadeOut('slow', function() {
+              $(this).remove(); 
+            });
+          }
+        });
+
       });
     });
   }
   var timerStarted;
-
+  console.log('Page loaded....');
   if(timerStarted == undefined) {
     load_builds();
-    timerStarted = setInterval(load_builds, 3000);
+    timerStarted = setInterval(load_builds, 10000);
   }
 
