@@ -1,7 +1,7 @@
 class BuildsController < ApplicationController
 
   #before_filter :find_build, :except => [:latest_builds, :latest_builds_by_project]
-
+  before_filter :find_build, :only => [:show]
   def destroy
     @build.destroy
     respond_to do |format|
@@ -17,7 +17,14 @@ class BuildsController < ApplicationController
   end
 
   def latest_builds
-    @builds = Build.asc(:build_num).limit(10)
+    @builds = Build.desc(:build_num).limit(10)
+    respond_to do |format|
+      format.json { render :json => @builds.as_json }
+    end
+  end
+
+  def latest_by_project
+    @builds = Build.where(:slug => params[:id]).desc(:build_num).limit(10)
     ap @builds.count
     respond_to do |format|
       format.json { render :json => @builds.as_json }

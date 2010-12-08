@@ -2,7 +2,7 @@
   load_builds = function() {
     clearInterval();
     $.get('/list', function(data) {
-      $.each(data, function(i, build) {
+      $.each(data.reverse(), function(i, build) {
         template = renderTemplate('javascripts/templates/build.js.haml', build);
         template = $(template).hide();
         div_tag = $('#' + build.id);
@@ -15,7 +15,7 @@
         }
 
         var keep = data.length;
-        console.log('Keeping ' + keep + ' builds...');
+        //console.log('Keeping ' + keep + ' builds...');
         $('.block').each(function(i, block) {
           if(i >= keep) {
             $(this).last().fadeOut('slow', function() {

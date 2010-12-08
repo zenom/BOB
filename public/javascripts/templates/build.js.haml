@@ -2,7 +2,11 @@
   .block_head
     .bheadl
     .bheadr
-    %h2= project_name
+    %h2
+      = project_name
+      = " - "
+      %a.project-view{href: '/list/' + project_slug}
+        View
     %span.ajax-loading
     %ul
       %li
@@ -35,7 +39,8 @@
 
     %div.small.right
       %strong ID:
-      = " " + id + " (" + build_num + ")"
+        %a{href: '/builds/' + id}
+          = " " + id + " (" + build_num + ")"
       %br/
       %strong Build Steps:
       = " " + total_steps
