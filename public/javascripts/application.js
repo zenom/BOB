@@ -1,32 +1,52 @@
 var dashboard = $.sammy('#builds', function() {
   this.use(Sammy.Haml);
   var context = this;
+  var timerInt;
 
   this.bind('load-builds', function(evt, data) {
     context = this;
     url = (typeof(data) == 'object') ? '/list.json' : '/list/' + data + '.json'
-    context.$element().html('');
     $.getJSON(url, function(builds) {
       $.each(builds, function(i, build) {
         project_page = (typeof(data) == 'object') ? false : true;
-        context.render('javascripts/templates/build.js.haml', {build: build, project_page: project_page})
-          .appendTo(context.$element());
-      });
+        found = context.$element().find('#' + build.id).length;
+        context.render('javascripts/templates/build.js.haml', {build: build, project_page: project_page}, function(tmpl) {
+          if(found) {
+            $('#' + build.id).replaceWith(tmpl);
+          } else {
+            context.$element().append($(tmpl).hide().fadeIn('slow'));
+          }
+        });
+
+      })
     });
+    //context.trigger('update-timer', url);
+  });
+
+  this.bind('update-timer', function(evt, data) {
+    clearInterval(timerInt);
+    timerInt = setInterval(function() {
+      (data == undefined) ? context.trigger('load-builds') : context.trigger('load-builds', data); 
+    }, 5000);
   });
 
   this.get('#/dashboard', function(context) {
+    context.$element().html('');
     context.trigger('load-builds');
+    context.trigger('update-timer');
   });
 
   this.get('#/dashboard/:project', function(context) {
+    context.$element().html('');
     context.trigger('load-builds', this.params['project']);
+    context.trigger('update-timer', this.params['project']);
   });
 
 });
 
 $(function() {
 
+  /* auto build command */
   $('.command').live('keyup', function() {
     command     = $(this).val().split(/\r\n|\r|\n/);
     parent_div  = $(this).parent().parent();
@@ -34,7 +54,10 @@ $(function() {
     pre_area.html(command.join(' && '));
   });
 
+  /* hide messages on a timer */
+  $('div.message').fadeIn('fast').delay(5000).fadeOut('slow');
 
+  /* project / step management */
   $('.show_step').click(function() {
     parent = $(this).parent().parent().parent();
     parent.find('.step-form:first').toggle();

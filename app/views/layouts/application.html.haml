@@ -11,21 +11,9 @@
     /[if lt IE 8] <style type="text/css" media="all">@import url("/stylesheets/ie.css");</style>
     /[if IE] <script type="text/javascript" src="/javascripts/excanvas.js"></script>
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/jquery.filestyle.mini.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/jquery.wysiwyg.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/jquery.date_input.pack.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/facebox.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/jquery.visualize.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/jquery.select_skin.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/ajaxupload.js", :type => "text/javascript"}
-    %script{:src => "/javascripts/jquery.pngfix.js", :type => "text/javascript"}
-    /%script{:src => "/javascripts/custom.js", :type => "text/javascript"}
-    //%script{:src => "/javascripts/haml.js", :type => "text/javascript" }
-    %script{:src => "/javascripts/rails.js", :type => "text/javascript" }
-    %script{:src => "/javascripts/sammy.js", :type => "text/javascript" }
-    %script{:src => "/javascripts/plugins/sammy.json.js", :type => "text/javascript" }
-    %script{:src => "/javascripts/plugins/sammy.haml.js", :type => "text/javascript" }
-    %script{:src => "/javascripts/application.js", :type => "text/javascript" }
+    = javascript_include_tag 'jquery.pngfix.js', 'rails.js', 'sammy.js', 'plugins/sammy.json.js',
+      'plugins/sammy.haml.js', 'application.js'
+
     = csrf_meta_tag
   %body
     #hld
