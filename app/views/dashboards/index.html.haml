@@ -1,36 +1,40 @@
 :javascript
-  load_builds = function() {
-    clearInterval();
-    $.get('/list', function(data) {
-      $.each(data.reverse(), function(i, build) {
-        template = renderTemplate('javascripts/templates/build.js.haml', build);
-        template = $(template).hide();
-        div_tag = $('#' + build.id);
-        if(div_tag.length == 0) {
-          $('#builds').after(template);
-          $(template).fadeIn('slow');
+
+  var timerStarted;
+  var pollURL = '/list';
+
+  fetchBuilds = function() {
+    $.getJSON(pollURL, function(data) {
+      //data = data.reverse();
+      $.each(data, function(i, build) {
+        template = $(renderTemplate('javascripts/templates/build.js.haml', build)).hide();
+        bid = '#' + build.id;
+
+        if($(bid).length == 1) {
+          template.show();
+          $(bid).replaceWith(template);
         } else {
-          $(template).show();
-          div_tag.replaceWith(template);
+          $('#builds').append(template);
+          template.fadeIn('slow');
         }
-
-        var keep = data.length;
-        //console.log('Keeping ' + keep + ' builds...');
-        $('.block').each(function(i, block) {
-          if(i >= keep) {
-            $(this).last().fadeOut('slow', function() {
-              $(this).remove(); 
-            });
-          }
-        });
-
       });
     });
   }
-  var timerStarted;
-  console.log('Page loaded....');
-  if(timerStarted == undefined) {
-    load_builds();
-    timerStarted = setInterval(load_builds, 10000);
+
+  $('a.project-view').live('click', function(e) {
+    e.preventDefault();
+    $('#builds').html('');
+    pollURL = $(this).attr('href');
+    buildTimer();
+  });
+
+  buildTimer = function() {
+    fetchBuilds();
+    clearInterval(timerStarted);
+    timerStarted = setInterval(function() {
+      //console.log(pollURL);
+      fetchBuilds();
+    }, 10000);
   }
 
+  buildTimer();

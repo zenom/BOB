@@ -4,11 +4,11 @@
     .bheadr
     %h2
       = project_name
-      = " - "
-      %a.project-view{href: '/list/' + project_slug}
-        View
     %span.ajax-loading
     %ul
+      %li
+        %a.project-view{href: '/list/' + project_slug}
+          Project View
       %li
         %a{href: '/projects/' + project_slug + '/edit'}
           Edit Project

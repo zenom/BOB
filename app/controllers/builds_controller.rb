@@ -24,8 +24,8 @@ class BuildsController < ApplicationController
   end
 
   def latest_by_project
-    @builds = Build.where(:slug => params[:id]).desc(:build_num).limit(10)
-    ap @builds.count
+    project = Project.where(:slug => params[:id]).first
+    @builds = Build.where(:project_id => project.id).desc(:build_num).limit(10)
     respond_to do |format|
       format.json { render :json => @builds.as_json }
     end
