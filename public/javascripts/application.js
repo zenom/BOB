@@ -1,28 +1,31 @@
-$(function() {
-  
-  // message.notice needs to be removed on a timer.
+var dashboard = $.sammy('#builds', function() {
+  this.use(Sammy.Haml);
+  var context = this;
 
-  window.templates = {};
-  window.renderTemplate = function(temp_path, vars) {
-    var result = '';
-    tmpl_result = '';
-
-    if(templates[temp_path]) {
-      options = {locals: vars};
-      result = Haml.render(templates[temp_path], options);
-    } else {
-      $.ajax({
-        url: temp_path,
-        async: false,
-        success: function(data) {
-          options = {locals: vars};
-          templates[temp_path] = data;
-          result = Haml.render(data, options);
-        }
+  this.bind('load-builds', function(evt, data) {
+    context = this;
+    url = (typeof(data) == 'object') ? '/list.json' : '/list/' + data + '.json'
+    context.$element().html('');
+    $.getJSON(url, function(builds) {
+      $.each(builds, function(i, build) {
+        project_page = (typeof(data) == 'object') ? false : true;
+        context.render('javascripts/templates/build.js.haml', {build: build, project_page: project_page})
+          .appendTo(context.$element());
       });
-    }
-    return result;
-e };
+    });
+  });
+
+  this.get('#/dashboard', function(context) {
+    context.trigger('load-builds');
+  });
+
+  this.get('#/dashboard/:project', function(context) {
+    context.trigger('load-builds', this.params['project']);
+  });
+
+});
+
+$(function() {
 
   $('.command').live('keyup', function() {
     command     = $(this).val().split(/\r\n|\r|\n/);

@@ -1,55 +1,56 @@
-.block{id: id, class: state}
+.block{id: build.id, class: build.state}
   .block_head
     .bheadl
     .bheadr
     %h2
-      = project_name
+      = build.project_name
     %span.ajax-loading
     %ul
+      :if !project_page
+        %li
+          %a.project-view{href: '#/dashboard/' + build.project_slug}
+            Project View
       %li
-        %a.project-view{href: '/list/' + project_slug}
-          Project View
-      %li
-        %a{href: '/projects/' + project_slug + '/edit'}
+        %a{href: '/projects/' + build.project_slug + '/edit'}
           Edit Project
       %li
-        %a{href: '/builds/' + id}
+        %a{href: '/builds/' + build.id}
           Details
       %li
-        %a{href: '/builds/' + id, data-confirm: 'Are you sure?', data-method: 'delete'}
+        %a{href: '/builds/' + build.id, data-confirm: 'Are you sure?', data-method: 'delete'}
           Delete
   .block_content
     %div.small.left
       %strong Queued:
-      = " " + created_at
+      = " " + build.created_at
       %br/
       %strong Started:
-      = " " + started_at
+      = " " + build.started_at
       %br/
       %strong Completed:
-      = " " + completed_at
+      = " " + build.completed_at
       %br/
       %strong Commit:
       = " " 
-      :if commit_url == commit_id
-        = commit_id
-      :if commit_url != commit_id
-        %a{href: commit_url}
-          = commit_id
+      :if build.commit_url == build.commit_id
+        = build.commit_id
+      :if build.commit_url != build.commit_id
+        %a{href: build.commit_url}
+          = build.commit_id
 
     %div.small.right
       %strong ID:
-        %a{href: '/builds/' + id}
-          = " " + id + " (" + build_num + ")"
+        %a{href: '/builds/' + build.id}
+          = " " + build.id + " (" + build.build_num + ")"
       %br/
       %strong Build Steps:
-      = " " + total_steps
+      = " " + build.total_steps
       %br/
       %strong Steps Completed:
-      = " " + steps_completed 
+      = " " + build.steps_completed 
       %br/
       %strong Message: 
-      = " " + commit_message
+      = " " + build.commit_message
       
   .bendl
   .bendr
