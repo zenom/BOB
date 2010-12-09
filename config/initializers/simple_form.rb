@@ -18,10 +18,10 @@ SimpleForm.setup do |config|
   # config.error_notification_tag = :p
 
   # You can wrap all inputs in a pre-defined tag.
-  # config.wrapper_tag = :div
+  config.wrapper_tag = :div
 
   # CSS class to add to all wrapper tags.
-  config.wrapper_class = :p
+  #config.wrapper_class = :p
 
   # CSS class to add to the wrapper if the field has errors.
   # config.wrapper_error_class = :field_with_errors
@@ -34,10 +34,10 @@ SimpleForm.setup do |config|
   # config.required_by_default = true
 
   # Series of attemps to detect a default label method for collection.
-  # config.collection_label_methods = [ :to_label, :name, :title, :to_s ]
+  config.collection_label_methods = [ :to_label, :name, :title, :to_s ]
 
   # Series of attemps to detect a default value method for collection.
-  # config.collection_value_methods = [ :id, :to_s ]
+  config.collection_value_methods = [ :id, :to_s ]
 
   # Collection of methods to detect if a file type was given.
   # config.file_methods = [ :file?, :public_filename ]

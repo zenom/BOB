@@ -41,6 +41,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    user_ids = params[:project][:user_ids]
+    new_uids = []
+    user_ids.each do |id|
+      new_uids << id unless id.blank? 
+    end
+    params[:project][:user_ids] = new_uids
+
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to(projects_url, :notice => "Project updated.") }

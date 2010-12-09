@@ -42,11 +42,7 @@
       = f.check_box :private, :class => :checkbox
       = f.label :private
       %p
-      .users
-        %h2 Users with Access
-        - User.any_in(:role => ['client', 'admin']).each do |user|
-          = user.first_name
-          %br/
+        = f.association :users, :collection => User.any_in(:role => ['client', 'admin']), :as => :check_boxes
       %p
       = f.button :submit, :class => "submit mid"
       %p

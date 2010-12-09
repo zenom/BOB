@@ -660,7 +660,27 @@ form textarea.wysiwyg { width: 98%; padding: 0; }
 form input.radio,
 form input.checkbox {
 	vertical-align: middle;
+    padding-right: 10px;
 }
+
+label.collection_check_boxes {
+	display: block;
+}
+
+label.check_boxes.optional {
+    font-family: "Titillium999", "Trebuchet MS", Arial, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #454545;
+	margin-bottom: 10px;
+	display: block;
+	border-bottom: 1px solid #b2b2b2;
+}
+
+input.check_boxes.optional {
+	margin-right: 10px;
+}
+
 
 
 /* Custom form select element */

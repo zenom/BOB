@@ -12,6 +12,10 @@ class User
 
   validates_presence_of :first_name, :last_name
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   protected
     def password_required?
       !persisted? || password.present? || password_confirmation.present?
