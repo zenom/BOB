@@ -11,15 +11,26 @@ describe Project do
   it { should have_field(:scm_path).of_type(String) } 
   it { should have_field(:fixed_branch).of_type(Boolean) }
   it { should have_field(:branch_name).of_type(String) }
+  it { should have_field(:private).of_type(Boolean) }
+
   it { should reference_many(:builds) }
   it { should reference_many(:commits) }
+  it { should reference_many(:users).stored_as(:array) }
   it { should embed_many(:steps) }
   it { should embed_one(:campfire) }
 
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:scm_path) }
+  it { should validate_presence_of(:keep_build_count) }
+
+
+  it 'should process a new build'
+  it 'should count total builds properly'
+  it 'shoul calculate fail rate properly'
+
+
   context "fabricate project" do
-    let(:project) do
-      Fabricate(:project)
-    end
+    let(:project) { Fabricate(:project) }
 
     it { project.should_not be_nil }
     it { project.name.should_not be_nil }
@@ -28,9 +39,7 @@ describe Project do
   end
 
   context "building a project" do
-    let(:project) do
-      Fabricate(:project)
-    end
+    let(:project) { Fabricate(:project) }
 
     before(:each) do
       base_dir = Rails.root.join('spec', 'mocks', 'repos')

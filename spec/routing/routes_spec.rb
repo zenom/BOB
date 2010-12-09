@@ -26,11 +26,18 @@ describe "test routing" do
     )
   end
 
-  it 'routes /build/:id/since to builds#latest_builds' do
-    { :get => '/build/123/since' }.should route_to(
+  it 'routes /list to builds@latest_builds' do
+    { :get => '/list' }.should route_to(
       :controller => 'builds',
-      :action => 'latest_builds',
-      :id => '123'
+      :action => 'latest_builds'
+    )
+  end
+
+  it 'routes /list/:id to builds#latest_by_project' do
+    { :get => '/list/test-app' }.should route_to (
+      :controller => 'builds',
+      :action => 'latest_by_project',
+      :id => 'test-app'
     )
   end
 

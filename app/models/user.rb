@@ -10,7 +10,7 @@ class User
   field :last_name,     :type => String
   field :role,          :type => String
 
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :role
 
   def name
     "#{first_name} #{last_name}"
