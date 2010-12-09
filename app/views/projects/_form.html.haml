@@ -20,8 +20,8 @@
       .bheadr
       %h2
         = form_name
-        = " - " unless @project.new_record?
-        = link_to "BUILD", build_project_path(project) unless @project.new_record?
+        = " - " unless project.new_record?
+        = link_to "BUILD", build_project_path(project) unless project.new_record?
       %span.ajax-loading
       %ul
         %li
@@ -86,7 +86,7 @@
             = steps.error :command
             = steps.label :command, :required => true
             = steps.text_area :command, :class => :command 
-          = link_to "Remove Step", @project.new_record? ? '#' : delete_step_path(project, :step => steps.object.id), :class => :delete_step
+          = link_to "Remove Step", project.new_record? ? '#' : delete_step_path(project, :step => steps.object.id), :class => :delete_step
           %hr
       %input{:type => 'button', :value => 'New Step', :class => 'submit mid addstep'} 
       %p

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
+  before_filter :find_user, :only => [:edit, :update, :destroy]
+
   def index
     @users = User.all
   end
@@ -21,11 +23,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(users_path, :notice => "User updated.") }
@@ -36,9 +36,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to(users_path)
   end
 
+  def find_user
+    @user = User.find(params[:id]) 
+  end
+  private :find_user
 end
+
