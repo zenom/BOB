@@ -11,4 +11,9 @@ class User
   field :role,          :type => String
 
   validates_presence_of :first_name, :last_name
+
+  protected
+    def password_required?
+      !persisted? || password.present? || password_confirmation.present?
+    end
 end

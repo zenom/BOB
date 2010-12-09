@@ -9,6 +9,7 @@ class Project
   field   :keep_build_count,  :type => Integer, :default => 10 
   field   :fixed_branch,      :type => Boolean, :default => false
   field   :branch_name,       :type => String,  :default => 'master'
+  field   :private,           :type => Boolean, :default => false
   slug    :name
 
   index :branch_name

@@ -35,13 +35,33 @@
       = f.input :branch_name, :input_html => {:class => :text }
       %p
       = f.input :keep_build_count, :input_html => {:class => :text }
+      /%p
+      /= f.check_box :fixed_branch, :class => :checkbox
+      /= f.label :fixed_branch
       %p
-      = f.check_box :fixed_branch, :class => :checkbox
-      = f.label :fixed_branch
+      = f.check_box :private, :class => :checkbox
+      = f.label :private
       %p
-      %h3
-        = image_tag('notifications/campfire.png', :width => 16, :height => 16) 
+      .users
+        %h2 Users with Access
+        - User.any_in(:role => ['client', 'admin']).each do |user|
+          = user.first_name
+          %br/
+      %p
+      = f.button :submit, :class => "submit mid"
+      %p
+    .bendl
+    .bendr
+
+  .block.small.right
+    .block_head
+      .bheadl
+      .bheadr
+      %h2 
+        = image_tag('notifications/campfire.png', :width => 22, :height => 22) 
         Campfire
+    .block_content
+      %h3
         = f.simple_fields_for :campfire do |cf|
           = cf.input :token, :input_html => {:class => :text}
           %p 
@@ -52,9 +72,7 @@
           = cf.check_box :ssl, :class => :checkbox
           = cf.label :ssl
 
-      %p 
-      = f.button :submit, :class => "submit mid"
-      %p
+
     .bendl
     .bendr
 

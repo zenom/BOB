@@ -1,5 +1,13 @@
 $(function() {
 
+  $('#project_private').change(function() {
+    if($(this).is(':checked')) {
+      alert('yes');
+    } else {
+      alert('no');
+    }
+  });
+
   /* auto build command */
   $('.command').live('keyup', function() {
     command     = $(this).val().split(/\r\n|\r|\n/);

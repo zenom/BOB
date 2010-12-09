@@ -9,5 +9,5 @@
 # Default User
 admin = User.create(:first_name => 'Admin', :last_name => 'User', 
                     :email => 'admin@test.com', :password => '123456', 
-                    :password_confirmation => '123456')
+                    :password_confirmation => '123456', :role => 'admin')
 admin.save!
