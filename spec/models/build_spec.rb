@@ -10,48 +10,44 @@ describe Build do
   it { should have_field(:started_at).of_type(Time) }
   it { should have_field(:completed_at).of_type(Time) }
 
-  context "perform with good data" do
+  let(:project) { Fabricate(:project) }
+  subject { Fabricate(:build, :project => project) }
+
+  context "a good build" do
+
     before(:each) do
       build_testrepo
-      @project  = Fabricate(:project)
-      @build    = Fabricate(:build, :project => @project)
-      @build.should_receive(:successful_build)
-      @build.perform
+      subject.should_receive(:successful_build)
+      subject.perform
+    end
+    after(:each) { remove_testrepo }
+
+
+    it "should have success as state" do
+      subject.state.should eql 'success'
     end
 
-    after(:each) do
-      remove_testrepo
+    it "should have 5 build steps" do
+      subject.build_steps.count.should eql 5
     end
 
-    it "should complete successfully" do
-      @build.state.should eql 'success'
-    end
-
-    it "should have build steps" do
-      @build.build_steps.count.should eql 5
-    end
-
-    it "should have output in the build steps" do
-      @build.build_steps.first.output.should_not be_nil
+    it "should have output for a build step" do
+      subject.build_steps.first.output.should_not be_nil
     end
 
     it "should respond to success?" do 
-      @build.should be_success
-    end
-
-    it "latest_commit" do
-      @build.commits.last.should eql @build.latest_commit 
+      should be_success
     end
 
   end
 
 
-  context "perform with bad data" do
+  context "a bad build" do
 
     before(:each) do
       bad_step  = Fabricate.build(:step, :name => "Bad Step", :command => 'lkjasdfklasdf')
-      @project  = Fabricate(:project, :steps => [bad_step])
-      @build    = Fabricate(:build, :project => @project)
+      project  = Fabricate(:project, :steps => [bad_step])
+      @build    = Fabricate(:build, :project => project)
       @build.should_receive(:failed_build)
       @build.perform
     end
@@ -66,8 +62,17 @@ describe Build do
 
   end
 
+  it 'should perform a build'
+  it 'should generate a proper build directory'
+  it 'should have a duration'
+  it 'should provide has_failure?'
+  it 'should provide steps completed'
+
+  it 'should have a valid latest_commit' do
+    subject.commits.last.should eql subject.latest_commit 
+  end
+
   it 'should generate proper build numbers' do
-    project = Fabricate(:project)
     10.times { Fabricate(:build, :project => project) } 
     2.times { Build.last.destroy }
     build = Fabricate(:build, :project => project)
@@ -75,7 +80,6 @@ describe Build do
   end
  
   it 'should clean old builds' do
-    project = Fabricate(:project)
     20.times { |i| Fabricate(:build, :created_at => Time.now.utc + i.minutes, :project => project, :state => :success) }
     Build.count.should eql 20
     Build.clean_old_builds(project.id)
