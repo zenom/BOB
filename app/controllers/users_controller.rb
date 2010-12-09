@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @users = User.all
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.save
+      if @user.update_attributes(params[:user])
         format.html { redirect_to(users_path, :notice => "User updated.") }
       else
         format.html { render :action => "new" }

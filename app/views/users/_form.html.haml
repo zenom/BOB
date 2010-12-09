@@ -33,6 +33,8 @@
       %p
       = f.input :password_confirmation, :input_html => {:class => :text }
       %p
+      = f.input :role, :collection => User::ROLES
+      %p
       = f.button :submit, :class => "submit mid"
       %p
     .bendl

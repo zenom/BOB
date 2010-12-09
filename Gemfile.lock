@@ -44,6 +44,7 @@ GEM
     bson (1.1.4)
     bson_ext (1.1.4)
     builder (2.1.2)
+    cancan (1.4.1)
     capybara (0.3.9)
       culerity (>= 0.2.4)
       mime-types (>= 1.16)
@@ -204,6 +205,7 @@ DEPENDENCIES
   akephalos
   awesome_print
   bson_ext (= 1.1.4)
+  cancan
   capybara
   database_cleaner!
   delayed_job

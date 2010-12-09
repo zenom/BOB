@@ -17,8 +17,7 @@ gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
 gem 'devise'
-
-#gem 'cancan'
+gem 'cancan'
 
 group :development, :test do
   gem 'rails_best_practices'
