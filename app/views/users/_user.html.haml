@@ -4,6 +4,8 @@
     = user.last_name
   %td
     = user.email
+  %td
+    = user.role.capitalize
   %td.actions
     = link_to "Edit", edit_user_path(user)
     = " | "
