@@ -1,0 +1,51 @@
+- if user.errors.any?
+  .block
+    .block_head
+      .bheadl
+      .bheadr
+      %h2 ERRORS
+    .block_content
+      #error_explanation
+        %h2= "#{pluralize(user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - user.errors.full_messages.each do |msg|
+            %li= msg
+    .bendl
+    .bendr
+
+= simple_form_for user do |f|
+  .block.small.left
+    .block_head
+      .bheadl
+      .bheadr
+      %h2
+        = form_name
+      %span.ajax-loading
+    / .block_head ends
+    .block_content
+      = f.input :email, :input_html => {:class => :text }
+      %p
+      = f.input :first_name, :input_html => {:class => :text }
+      %p
+      = f.input :last_name, :input_html => {:class => :text }
+      %p
+      = f.input :password, :input_html => {:class => :text }
+      %p
+      = f.input :password_confirmation, :input_html => {:class => :text }
+      %p
+      = f.button :submit, :class => "submit mid"
+      %p
+    .bendl
+    .bendr
+
+  .block.small.right
+    .block_head
+      .bheadl
+      .bheadr
+      %h2 Info
+    .block_content
+
+
+    .bendl
+    .bendr
+

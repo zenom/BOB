@@ -1,0 +1,10 @@
+%tr
+  %td
+    = user.first_name
+    = user.last_name
+  %td
+    = user.email
+  %td.actions
+    = link_to "Edit", edit_user_path(user)
+    = " | "
+    = link_to "Delete", user_path(user), :confirm => "Are you sure?", :method => "delete"
