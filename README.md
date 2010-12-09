@@ -31,7 +31,9 @@ Setup
    Environment vars for production user, pass, host, database name.
 3. Modify config/app_config.yml to setup your domains.
 4. Set up your nginx, apache, thin etc. server for the CI codebase. 
-5. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
+5. Run `rake db:seed` to setup the default admin user (admin@test.com /
+   123456)
+6. Run delayed job. `RAILS_ENV=production script/delayed_job -n 2 start` 
 
 From here just go into the web interface and add a new project. You can
 create as many build steps as you wish and keep each step organized a
