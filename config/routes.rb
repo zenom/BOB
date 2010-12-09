@@ -5,6 +5,7 @@ Bob::Application.routes.draw do
   resources :dashboards
   resources :projects
   resources :builds
+  resources :users
 
   match "/projects/:id/build", :to => "projects#build",:as=> :build_project
   match "/projects/:id/delete_step", :to => "projects#delete_step", :as => :delete_step

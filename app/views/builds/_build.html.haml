@@ -7,6 +7,8 @@
     %span.ajax-loading
     %ul
       %li
+        = link_to "Project View", dashboard_path(build.project.slug) 
+      %li
         = link_to "Edit Project", edit_project_path(build.project)
       %li
         = link_to "Details", build_path(build)

@@ -26,9 +26,11 @@
             %a{:href => "#"} BOB (BUILDER)
           %ul#nav
             %li
-              = link_to "Dashboard", '/#/dashboard' 
+              = link_to "Dashboard", dashboards_path 
             %li{:class => current_page?("admin/sources") ? "active":""}
               = link_to "Projects", projects_url
+            %li
+              = link_to "Users", users_url
             
             /%li
             /  = link_to "Users", '#'
