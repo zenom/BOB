@@ -10,13 +10,13 @@
 
   def send_failed(build)
     link = build_url(build, :host => APP_CONFIG[:domain])
-    send_message("[#{build.project.name}] Build #{build.id} failed. #{link}")
+    send_message("[#{build.project.name}/#{build.latest_commit.branch}] Build #{build.id} failed. #{link}")
     send_message(build.build_steps.last.really_clean_output, true)
   end
 
   def send_success(build)
     link = build_url(build, :host => APP_CONFIG[:domain])
-    send_message("[#{build.project.name}] Build #{build.id} successful. #{link}")
+    send_message("[#{build.project.name}/#{build.latest_commit.branch}] Build #{build.id} successful. #{link}")
   end
 
   def post_message?

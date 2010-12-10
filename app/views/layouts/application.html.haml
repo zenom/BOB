@@ -24,16 +24,20 @@
             %a{:href => "#"} BOB (BUILDER)
           %ul#nav
             %li
-              = link_to "Dashboard", dashboards_path 
-            %li{:class => current_page?("admin/sources") ? "active":""}
-              = link_to "Projects", projects_url
-            %li
-              = link_to "Users", users_url
+              = link_to "Dashboard", dashboards_path  
+            - if can? :manage, Project
+              %li{:class => current_page?("admin/sources") ? "active":""}
+                = link_to "Projects", projects_url
+            - if can? :manage, User
+              %li
+                = link_to "Users", users_url
             
             /%li
             /  = link_to "Users", '#'
           %p
             / User login info
+            = current_user.name
+            = current_user.role.capitalize
         
         - [:error, :warning, :notice, :info].each do |msg_type|
           = render :partial => "layouts/flash", :locals => {:msg_type => msg_type, :flash => flash} unless flash[msg_type.to_sym].blank?

@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_filter :find_project, :only => [:destroy, :edit, :update, :build, :delete_step]
+  load_and_authorize_resource
 
   # index, lookup all the sources
   def index
@@ -11,11 +12,15 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.steps.build
     @project.build_campfire
-    #@project.campfire.build = Notifier::Campfire.new
-    #ap @project.campfire
   end
 
   def create
+    user_ids = params[:project][:user_ids]
+    new_uids = []
+    user_ids.each do |id|
+      new_uids << id unless id.blank? 
+    end
+    params[:project][:user_ids] = new_uids
     @project = Project.new(params[:project])
     respond_to do |format|
       if @project.save
@@ -37,7 +42,7 @@ class ProjectsController < ApplicationController
     end
     if @project.campfire
       @project.campfire = Notifier::Campfire.new
-   end
+    end
   end
 
   def update
@@ -60,6 +65,7 @@ class ProjectsController < ApplicationController
   def build
     @project.build!
     redirect_to(dashboards_url, :notice => "Build request sent.")
+    authorize! :update, @project
   end
 
   def delete_step 

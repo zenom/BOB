@@ -2,7 +2,6 @@ class User
   include Mongoid::Document
   ROLES = %w[admin client blocked]
 
-  attr_accessor :role
   devise :database_authenticatable, :recoverable, :rememberable, 
     :trackable, :validatable
 
@@ -11,6 +10,8 @@ class User
   field :role,          :type => String
 
   validates_presence_of :first_name, :last_name, :role
+
+  references_many :projects, :stored_as => :array, :inverse_of => :users
 
   def name
     "#{first_name} #{last_name}"

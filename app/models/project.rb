@@ -31,6 +31,7 @@ class Project
   accepts_nested_attributes_for :steps
   accepts_nested_attributes_for :campfire
 
+
   # run the build
   def build!
     #Commit.build_git_commit(self) 

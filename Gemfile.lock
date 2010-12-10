@@ -4,6 +4,12 @@ GIT
   specs:
     database_cleaner (0.6.1)
 
+GIT
+  remote: https://github.com/bowsersenior/cancan.git
+  revision: 2ee6908a2a79366856cb9e3d0154097cdeb0eff5
+  specs:
+    cancan (1.4.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -44,7 +50,6 @@ GEM
     bson (1.1.4)
     bson_ext (1.1.4)
     builder (2.1.2)
-    cancan (1.4.1)
     capybara (0.3.9)
       culerity (>= 0.2.4)
       mime-types (>= 1.16)
@@ -209,7 +214,7 @@ DEPENDENCIES
   akephalos
   awesome_print
   bson_ext (= 1.1.4)
-  cancan
+  cancan!
   capybara
   database_cleaner!
   delayed_job

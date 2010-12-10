@@ -52,6 +52,7 @@ class Build
 
   end
 
+
   def processing_build
     self.build_steps.delete_all # just in case...we don't want them lingering
     self.update_attributes(:started_at => Time.now.utc) 

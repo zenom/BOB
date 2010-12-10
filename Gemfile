@@ -17,7 +17,7 @@ gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
 gem 'devise'
-gem 'cancan'
+gem 'cancan', :git => 'https://github.com/bowsersenior/cancan.git'
 
 group :development, :test do
   gem 'rails_best_practices'

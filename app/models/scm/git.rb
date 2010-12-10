@@ -18,7 +18,13 @@ module Bob
     end
 
     def self.checkout(build)
-      "git clone --branch #{build.project.branch_name} --depth 1 #{build.project.scm_path} #{build.build_dir}"
+      # will need to add the fixed branch stuff here if checked eventually
+      if build.project.fixed_branch
+        branch = build.project.branch_name
+      else
+        branch = build.latest_commit.branch.nil? ? 'master' : build.latest_commit.branch
+      end
+      "git clone --branch #{branch} --depth 1 #{build.project.scm_path} #{build.build_dir}"
     end
 
   end
