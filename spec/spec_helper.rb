@@ -12,6 +12,7 @@ RSpec.configure do |config|
   config.include Mongoid::Matchers
   config.mock_with :rspec
   config.fail_fast = true
+  config.include Devise::TestHelpers, :type => :acceptance
 
   config.before(:suite) do
     DatabaseCleaner.orm = "mongoid"

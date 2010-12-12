@@ -4,6 +4,7 @@
     .bheadr
     %h2
       = build.project.name
+      = image_tag('lock.png') if build.project.private
     %span.ajax-loading
     %ul
       - if can? :read, build.project

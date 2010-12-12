@@ -8,7 +8,7 @@ class Ability
       can :manage, :all
     elsif user.role == "client"
       can :read, Project do |project|
-        project.users.include?(user)
+        project.users.include?(user) || project.private == false
       end
       can :manage, Build do |build|
         build.project.users.include?(user)
