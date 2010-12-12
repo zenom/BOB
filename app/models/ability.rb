@@ -15,7 +15,7 @@ class Ability
       end
     else
       can :read, Project do |project|
-        project.private = false
+        project.private ? false : true
       end
     end
   end

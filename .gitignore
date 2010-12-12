@@ -6,3 +6,5 @@ tmp/**/*
 coverage/*
 
 /.irb-history
+
+capybara-*.html

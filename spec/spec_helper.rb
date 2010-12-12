@@ -2,13 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-#require 'webmock/rspec'
-#require 'vcr'
-
-#VCR.config do |c|
-#  c.cassette_library_dir = File.join(Rails.root, 'spec', 'mocks')
-#  c.stub_with :webmock
-#end
+require 'cancan/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -16,13 +10,15 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include Mongoid::Matchers
-  #config.include WebMock::API
-
   config.mock_with :rspec
+  config.fail_fast = true
 
-  config.before(:each) do
+  config.before(:suite) do
     DatabaseCleaner.orm = "mongoid"
     DatabaseCleaner.strategy = :truncation
+  end
+
+  config.after(:each) do
     DatabaseCleaner.clean
   end
 end

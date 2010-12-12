@@ -6,14 +6,18 @@
       = build.project.name
     %span.ajax-loading
     %ul
-      %li
-        = link_to "Project View", dashboard_path(build.project.slug) 
-      %li
-        = link_to "Edit Project", edit_project_path(build.project)
+      - if can? :read, build.project
+        %li
+          = link_to "Project View", dashboard_path(build.project.slug) 
+      - if can? [:edit, :update], build.project
+        %li
+          = link_to "Edit Project", edit_project_path(build.project)
       %li
         = link_to "Details", build_path(build)
-      %li
-        = link_to "Delete", build_path(build), :method => :delete, :confirm => "Are you sure?"
+
+      - if can? :delete, build
+        %li
+          = link_to "Delete", build_path(build), :method => :delete, :confirm => "Are you sure?"
   .block_content
     %div.small.left
       %strong Queued:

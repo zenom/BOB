@@ -4,8 +4,11 @@
   %td= project.branch_name
   %td.center= project.total_builds
   %td.center= (project.total_builds > 0) ? number_to_percentage(project.fail_rate, :precision => 0) : "n/a"
+  %td.center
+    = image_tag("lock.png", :width => 16, :height => 16, :alt => 'Private', :title => 'Private') if project.private
   %td
     = image_tag(Notifier::Campfire.icon, :width => 16, :height => 16, :alt => 'Campfire', :title => 'Campfire') if project.campfire.post_message?
+    /= image_tag("mail.png", :width => 16, :height => 16, :alt => 'Campfire', :title => 'Campfire') if project.campfire.post_message?
   %td.actions
     = link_to "Build", build_project_path(project)
     |

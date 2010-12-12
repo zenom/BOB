@@ -17,7 +17,7 @@ gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
 gem 'devise'
-gem 'cancan', :git => 'https://github.com/bowsersenior/cancan.git'
+gem 'cancan'#, :git => 'https://github.com/bowsersenior/cancan.git'
 
 group :development, :test do
   gem 'rails_best_practices'
@@ -37,5 +37,4 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner', :git => 'git://github.com/bmabey/database_cleaner.git'
   gem 'akephalos'
-  #gem "mocha"
 end

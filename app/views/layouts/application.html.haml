@@ -41,7 +41,7 @@
               = " | "
               = link_to "Logout", destroy_user_session_path
             - else
-              = link_to "Log In", new_user_session_path
+              = link_to "Log In", new_user_session_path, :class => 'login'
         - [:error, :warning, :notice, :info].each do |msg_type|
           = render :partial => "layouts/flash", :locals => {:msg_type => msg_type, :flash => flash} unless flash[msg_type.to_sym].blank?
         #builds
