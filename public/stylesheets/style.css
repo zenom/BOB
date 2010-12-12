@@ -574,7 +574,13 @@ a:hover {
 	background: #ecf9ff url(../images/info.gif) 12px 12px no-repeat;
 	color: #0888c3;
 	}
-	
+
+.message.alert {
+	border: 1px solid #bbdbe0;
+	background: #ecf9ff url(../images/info.gif) 12px 12px no-repeat;
+	color: #0888c3;
+	}
+
 .message.warning {
 	border: 1px solid #e5e181;
 	background: #fefde2 url(../images/warning.gif) 12px 12px no-repeat;

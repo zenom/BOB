@@ -2,6 +2,7 @@ class BuildsController < ApplicationController
 
   #before_filter :find_build, :except => [:latest_builds, :latest_builds_by_project]
   before_filter :find_build, :only => [:show, :destroy]
+
   def destroy
     @build.destroy
     respond_to do |format|

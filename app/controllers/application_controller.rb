@@ -5,4 +5,14 @@ class ApplicationController < ActionController::Base
     flash[:alert] = exception.message
     redirect_to root_url
   end
+
+
+  layout :layout_by_resource
+  def layout_by_resource
+    if devise_controller?
+      false
+    else
+      "application"
+    end
+  end
 end

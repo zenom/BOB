@@ -32,6 +32,12 @@ class Project
   accepts_nested_attributes_for :campfire
 
 
+  # public only projects
+  scope :public_projects, where(:private => false)
+
+  # public or where user is allowed
+  scope :allowed_projects, lambda { |user| any_of({:user_ids.in => [user.id]}, {:private => false})  }
+
   # run the build
   def build!
     #Commit.build_git_commit(self) 

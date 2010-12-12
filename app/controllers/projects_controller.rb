@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_filter :find_project, :only => [:destroy, :edit, :update, :build, :delete_step]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create]
 
   # index, lookup all the sources
   def index
@@ -29,6 +29,9 @@ class ProjectsController < ApplicationController
         format.html { render :action => "new" }
       end
     end
+    # hack for some reason it wasn't working with load_and_authorize_resource on new projects
+    authorize! :create, @project
+
   end
 
   def destroy

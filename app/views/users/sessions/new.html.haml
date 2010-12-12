@@ -1,0 +1,44 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title Minerva ● Login
+    %style{:media => "all", :type => "text/css"}
+      @import url("/stylesheets/style.css");
+    /[if IE] <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    /[if lt IE 8] <style type="text/css" media="all">@import url("/stylesheets/ie.css");</style>
+    /[if IE] <script type="text/javascript" src="/javascripts/excanvas.js"></script>
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js", :type => "text/javascript"}
+    = csrf_meta_tag
+  %body
+    #hld
+      .wrapper
+        / wrapper begins
+        .block.small.center.login
+          .block_head
+            .bheadl
+            .bheadr
+            %h2 Login
+
+          / .block_head ends
+          .block_content
+            - [:error, :warning, :notice, :info, :alert].each do |msg_type|
+              = render :partial => "layouts/flash", :locals => {:msg_type => msg_type, :flash => flash} unless flash[msg_type.to_sym].blank?
+
+            = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+              = f.input :email, :input_html => {:class => :text }
+              = f.input :password, :input_html => {:class => :text }
+              %p
+              = f.button :submit, :class => :submit, :value => "Login"
+              &nbsp;
+              = f.check_box :remember_me, :id => "rememberme", :class => :checkbox, :checked => true
+              = f.label :remember_me
+              %br/
+              = link_to "Forgot your password?", new_password_path(resource_name)
+              %br/
+          / .block_content ends
+          .bendl
+          .bendr
+        / .login ends
+      / wrapper ends
+    / #hld ends
