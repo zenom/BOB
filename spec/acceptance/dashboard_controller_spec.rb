@@ -10,8 +10,8 @@ feature "Dashboard" do
     visit '/dashboards'
   end
 
-  context "public / non-logged in user" do
-    scenario "should display the dashboard" do
+  context "as a non-logged in user I" do
+    scenario "should see the dashboard" do
       page.should have_content("Dashboard")
     end
 
@@ -94,6 +94,62 @@ feature "Dashboard" do
     scenario "should not see a users dashboard link" do
       page.find_link('Users').should be_nil
     end
+  end
+
+  context "as an admin I" do
+    let(:user) { Fabricate(:user, :role => 'admin') }
+
+    before(:each) do
+      @project.users << user
+      @project.save
+      @private_project.users << user
+      @private_project.save
+      log_in(user)
+    end
+
+    scenario "should see two projects on the dashboard" do
+      page.should have_css("##{@build.id}", :count => 1)
+      page.should have_css("##{@private_build.id}", :count => 1)
+    end
+
+    scenario "should be able to view a public project view" do
+      within(:css, "##{@build.id}") do
+        page.find_link('Project View').should be_visible
+      end
+    end
+
+    scenario "should be able to view a private project view" do
+      within(:css, "##{@private_build.id}") do
+        page.find_link('Project View').should be_visible
+      end
+    end
+
+    scenario "should be able to delete a build" do
+      within(:css, "##{@private_build.id}") do
+        page.find_link("Delete").should be_visible
+      end
+    end
+
+    scenario "should see an edit private project link" do
+      within(:css, "##{@private_build.id}") do
+        page.find_link("Edit Project").should be_visible
+      end
+    end
+
+    scenario "should see an edit public project link" do
+      within(:css, "##{@build.id}") do
+        page.find_link("Edit Project").should be_visible
+      end
+    end
+
+    scenario "should see the projects dashboard link" do
+      page.find_link('Projects').should be_visible
+    end
+
+    scenario "should see the users dashboard link" do
+      page.find_link('Users').should be_visible
+    end
+
   end
 
 end
