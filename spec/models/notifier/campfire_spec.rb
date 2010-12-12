@@ -25,7 +25,7 @@ describe Notifier::Campfire do
   it 'send message should trigger tinder' do
     connection = mock('Tinder::Campfire')
     room = mock('Tinder::Room')
-    message = "[#{@build.project.name}] Build #{@build.id} successful. http://localhost/builds/#{@build.id}"
+    message = "[#{@build.project.name}/#{@build.latest_commit.branch}] Build #{@build.id} successful. http://localhost/builds/#{@build.id}"
     Tinder::Campfire.stub!(:new).and_return(connection)
     connection.stub_chain(:find_room_by_name).and_return(room)
     room.should_receive(:speak).with(message) # need to make sure the message is right
