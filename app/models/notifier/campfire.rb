@@ -9,14 +9,16 @@
   embedded_in :project, :inverse_of => :campfire
 
   def send_failed(build)
+    branch = build.latest_commit.nil? ? build.project.branch_name : build.latest_commit.branch
     link = build_url(build, :host => APP_CONFIG[:domain])
-    send_message("[#{build.project.name}/#{build.latest_commit.branch}] Build #{build.id} failed. #{link}")
+    send_message("[#{build.project.name}/#{branch}] Build #{build.id} failed. #{link}")
     send_message(build.build_steps.last.really_clean_output, true)
   end
 
   def send_success(build)
+    branch = build.latest_commit.nil? ? build.project.branch_name : build.latest_commit.branch
     link = build_url(build, :host => APP_CONFIG[:domain])
-    send_message("[#{build.project.name}/#{build.latest_commit.branch}] Build #{build.id} successful. #{link}")
+    send_message("[#{build.project.name}/#{branch}] Build #{build.id} successful. #{link}")
   end
 
   def post_message?

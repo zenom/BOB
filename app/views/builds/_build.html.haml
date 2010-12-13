@@ -39,6 +39,9 @@
         - else
           = link_to build.latest_commit.guid, build.latest_commit.url,
           :target => :_blank
+      %br/
+      %strong Branch:
+      = build.latest_commit.nil? ? build.project.branch_name : build.latest_commit.branch
     %div.small.right
       %strong ID:
       = build.id
