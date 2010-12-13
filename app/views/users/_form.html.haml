@@ -33,7 +33,7 @@
       %p
       = f.input :password_confirmation, :input_html => {:class => :text }
       %p
-      = f.input :role, :collection => User::ROLES, :prompt => "Choose user Role"
+      = f.input :role, :collection => User::ROLES, :prompt => "Choose user Role", :input_html => {:class => :styled}
       %p
       = f.button :submit, :class => "submit mid"
       %p
