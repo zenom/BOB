@@ -13,7 +13,10 @@ would consider this a working alpha. As soon as I let BOB run for a
 couple weeks I will release it as a production release once I am certain
 major bugs are not in the code.
 
-Currently the code is tested on REE 1.8.7(-head) & 1.9.2-p0.
+Currently the code is tested on REE 1.8.7(-head)
+
+Ruby 1.9.2 is currently experiencing errors which I am trying to work
+out.
 
 
 In the works
