@@ -1,8 +1,0 @@
-development:
-  domain: lvh.me:3000
-
-test:
-  domain: localhost
-
-production:
-  domain: example.com 
