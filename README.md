@@ -91,19 +91,5 @@ work, so expect it to be supported in the very near future.
 Screenshots
 ===========
 
-
-Dashboard Page
---------------
-
-![Dashboard](http://files.droplr.com/files/59183674/ztsC.Screen%20shot%202010-12-04%20at%2013%3A37%3A27.png)
-
-Project Page
-------------
-
-![Project
-Page](http://files.droplr.com/files/59183674/mItg.Screen%20shot%202010-12-04%20at%2013%3A38%3A41.png)
-
-Sample Build Step Output
-------------------------
-
-![Sample Build Step Output](http://files.droplr.com/files/59183674/NtiU.Screen%20shot%202010-12-04%20at%2013%3A39%3A40.png)
+See more at:
+![BOB the Builder post with Screenshots](http://27eleven.com/post/2301911592/bob-the-builder)
