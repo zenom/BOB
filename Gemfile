@@ -9,25 +9,17 @@ gem 'mongoid_slug', :require => 'mongoid/slug'
 gem 'bson_ext', '1.1.4'
 gem 'delayed_job'
 gem 'delayed_job_mongoid'
-gem 'open4' # ?
-gem 'stringex'
+gem 'open4'
 gem 'jquery-rails'
 gem 'stateflow'
 gem 'hashie'
 gem 'tinder'
 gem 'simple_form'
 gem 'devise'
-gem 'cancan'#, :git => 'https://github.com/bowsersenior/cancan.git'
+gem 'cancan'
 
 group :development, :test do
-  gem 'rails_best_practices'
-  gem 'hirb'
-  gem 'wirble'
-  gem 'rcov'
-  gem 'awesome_print', :require => 'ap'
-  gem 'steak', '>= 1.0.0.beta.1'
-  gem 'growl'
-  gem 'guard-rspec'
+  gem 'steak', '~> 1.0.0'
   gem 'mongoid-rspec'
   gem 'capybara'
   gem 'launchy'
@@ -36,5 +28,13 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'database_cleaner', :git => 'git://github.com/bmabey/database_cleaner.git'
-  gem 'akephalos'
+
+  # just what I like to use, comment these out if you don't want to use
+  # them
+  gem 'guard-rspec'
+  gem 'growl'
+  gem 'rails_best_practices'
+  gem 'hirb'
+  gem 'wirble'
+  gem 'awesome_print', :require => 'ap'
 end

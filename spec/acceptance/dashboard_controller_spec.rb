@@ -88,11 +88,11 @@ feature "Dashboard" do
     end
 
     scenario "should not see a projects dashboard link" do
-      page.find_link('Projects').should be_nil
+      page.should_not have_xpath("//a[@href='/projects']", :count => 1)
     end
 
     scenario "should not see a users dashboard link" do
-      page.find_link('Users').should be_nil
+      page.should_not have_xpath("//a[@href='/users']", :count => 1)
     end
   end
 
