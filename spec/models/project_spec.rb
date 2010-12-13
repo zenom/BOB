@@ -23,12 +23,6 @@ describe Project do
   it { should validate_presence_of(:scm_path) }
   it { should validate_presence_of(:keep_build_count) }
 
-
-  it 'should process a new build'
-  it 'should count total builds properly'
-  it 'shoul calculate fail rate properly'
-
-
   context "fabricate project" do
     let(:project) { Fabricate(:project) }
 
@@ -75,6 +69,22 @@ describe Project do
         project.builds.first.commits.count.should eql 2
       end
     end
+
+    it 'should calculate total builds' do
+      2.times { Fabricate(:build, :project => subject) }
+      2.times { Fabricate(:build, :project => subject, :deleted_at => 10.minutes.ago) }
+      subject.total_builds.should eql 4
+    end
+
+    it 'should calculate failure rate' do
+      2.times { Fabricate(:build, :project => subject) }
+      2.times { Fabricate(:build, :project => subject, :state => :failed) }
+      subject.fail_rate.should eql 50.0
+    end
+
   end
+
+
+  
 
 end

@@ -62,11 +62,32 @@ describe Build do
 
   end
 
-  it 'should perform a build'
-  it 'should generate a proper build directory'
-  it 'should have a duration'
-  it 'should provide has_failure?'
-  it 'should provide steps completed'
+  it 'should generate a proper build directory' do
+    subject.build_dir.should eql(File.join(Rails.root + 'tmp/builds/' + subject.id.to_s))
+  end
+
+  it 'should have a duration' do
+    subject.duration.should eql 600.0
+  end
+
+  it 'should catch when a build has a failed step' do
+    step = Fabricate(:build_step, :state => :failed)
+    subject.build_steps << step
+    subject.has_failure?.should be_true
+  end
+
+  it 'should catch when a build passes' do
+    step = Fabricate(:build_step, :state => :success)
+    subject.build_steps << step
+    subject.has_failure?.should be_false
+  end
+
+  it 'should provide steps completed' do
+    Fabricate(:build_step, :build => subject, :state => :success) # makes up for git checkout step
+    2.times { Fabricate(:build_step, :build => subject, :state => :success) }
+    2.times { Fabricate(:build_step, :build => subject, :state => :building) }
+    subject.steps_completed.should eql 2
+  end
 
   it 'should have a valid latest_commit' do
     subject.commits.last.should eql subject.latest_commit 
