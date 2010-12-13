@@ -7,22 +7,6 @@ $(function () {
 	$('.block form input[type=file]').addClass('file');
 			
 	
-	// Web stats
-	$('table.stats').each(function() {
-		var statsType;
-		
-		if($(this).attr('rel')) { statsType = $(this).attr('rel'); }
-		else { statsType = 'area'; }
-		
-		$(this).hide().visualize({		
-			type: statsType,	// 'bar', 'area', 'pie', 'line'
-			width: '880px',
-			height: '240px',
-			colors: ['#6fb9e8', '#ec8526', '#9dc453', '#ddd74c']
-		});
-	});
-	
-	
 	// Messages
 	$('.block .message').hide().append('<span class="close" title="Dismiss"></span>').fadeIn('slow');
 	$('.block .message .close').hover(
