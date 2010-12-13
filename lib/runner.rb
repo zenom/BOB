@@ -16,15 +16,15 @@ class Runner
     '.bobrc'))
 
     output = ''
-    error = []
+    error = ''
     command = commands.join(' && ')
     clean_env do
       status = Open4.popen4(command) do |pid, stdin, stdout, stderr|
         #puts stdout.read
         while !stdout.eof? or !stderr.eof?
-          output += stdout.read_nonblock(2 ** 10) rescue Errno::EAGAIN
-          output += stderr.read_nonblock(2 ** 10) rescue Errno::EAGAIN
-          error  += stderr.read_nonblock(2 ** 10) rescue Errno::EAGAIN
+          output += stdout.read
+          output += stderr.read
+          error  += stderr.read
         end
       end
       unless status.exitstatus == 0
