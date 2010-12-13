@@ -92,4 +92,4 @@ Screenshots
 ===========
 
 See more at:
-![BOB the Builder post with Screenshots](http://27eleven.com/post/2301911592/bob-the-builder)
+[BOB the Builder post with Screenshots](http://27eleven.com/post/2301911592/bob-the-builder)
