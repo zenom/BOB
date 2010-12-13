@@ -5,6 +5,7 @@ class Build
   include Stateflow
   include Rails.application.routes.url_helpers
 
+  # fields
   field :state,         :type => String
   field :started_at,    :type => Time
   field :completed_at,  :type => Time
