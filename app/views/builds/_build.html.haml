@@ -30,6 +30,9 @@
       %strong Completed:
       = build.completed_at
       %br/
+      %strong Author:
+      = build.latest_commit.nil? ? "waiting" : build.latest_commit.author
+      %br/
       %strong Commit:
       - if build.latest_commit.nil?
         = "waiting"
@@ -52,6 +55,9 @@
       %br/
       %strong Steps Completed:
       = (build.steps_completed > 0) ? build.steps_completed : 'waiting'
+      %br/
+      %strong Author Email:
+      = build.latest_commit.nil? ? "waiting" : build.latest_commit.author_email
       %br/
       %strong Message:
       = build.commits.present? ? build.commits.last.message : "waiting"
