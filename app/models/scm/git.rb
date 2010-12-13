@@ -1,9 +1,9 @@
 module Bob
-
   class Git
+    def self.build_commit(build)
 
-     def self.build_commit(build)
-      command = "git log --max-count=1 --format=\"%H%n%an%n%ae%n%ad%n%s\" #{build.project.branch_name}"
+      # should use the branch thats checked out
+      command = "git log --max-count=1 --format=\"%H%n%an%n%ae%n%ad%n%s\""
       info = Runner.run(build.build_dir, command).split(/\n/)
       ## update git information
       commit = Commit.new
