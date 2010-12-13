@@ -34,7 +34,7 @@ describe "test routing" do
   end
 
   it 'routes /list/:id to builds#latest_by_project' do
-    { :get => '/list/test-app' }.should route_to (
+    { :get => '/list/test-app' }.should route_to(
       :controller => 'builds',
       :action => 'latest_by_project',
       :id => 'test-app'
