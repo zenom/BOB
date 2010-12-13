@@ -60,10 +60,8 @@ describe Ability do
       @ability = Ability.new(@user)
       @public_project = Fabricate(:project)
       @private_project = Fabricate(:project, :private => true)
-
       @private_project.users << @user
       @private_project.save
-
       @build = Fabricate(:build, :project => @private_project)
     end
     subject { @ability }

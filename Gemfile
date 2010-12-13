@@ -19,6 +19,7 @@ gem 'devise'
 gem 'cancan'
 
 group :development, :test do
+  gem 'rcov'
   gem 'steak', '~> 1.0.0'
   gem 'mongoid-rspec'
   gem 'capybara'
