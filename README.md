@@ -54,14 +54,10 @@ create as many build steps as you wish and keep each step organized a
 little nicer.  
 
 RVM
---- 
+---
 
-If you use rvm and maintain an .rvmrc in your project directory, BOB
-will automatically source this file so you don't have to source it in
-your build steps.
-
-Otherwise to run the build in a specific environment, you can do
-something like the following in one of your first build steps:  `source /home/user/.rvm/environments/ruby@gemset`
+To use RVM in your build steps simply do something like the following:
+`source /home/user/.rvm/environments/ruby@gemset`
 
 .bobrc
 ------
