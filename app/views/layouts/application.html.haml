@@ -31,9 +31,6 @@
             - if can? :manage, User
               %li
                 = link_to "Users", users_url
-            
-            /%li
-            /  = link_to "Users", '#'
           %p.user
             / User login info
             - if current_user
@@ -48,6 +45,10 @@
           = yield
         
         #footer
+          %strong Version: 
+          = BOB::VERSION
+          = " | "
+          = link_to "GitHub Repo", "https://github.com/zenom/BOB", :target => :_blank
       / wrapper ends
     / #hld ends
 
