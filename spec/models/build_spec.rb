@@ -99,6 +99,15 @@ describe Build do
     build = Fabricate(:build, :project => project)
     build.build_num.should eql 11
   end
+
+  it 'should run pending builds' do
+    3.times { |i| Fabricate(:build, :project => project, :created_at => Time.now.utc + i.minutes) }
+    project.builds.count.should eql 3
+    Build.run_pending_builds(project)
+    Delayed::Job.count.should eql 1
+    project.builds.count.should eql 1
+    project.builds.deleted.count.should eql 0 # shouldn't skew our build ratios
+  end
  
   it 'should clean old builds' do
     20.times { |i| Fabricate(:build, :created_at => Time.now.utc + i.minutes, :project => project, :state => :success) }

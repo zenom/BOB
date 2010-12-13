@@ -66,8 +66,13 @@ class ProjectsController < ApplicationController
   end
  
   def build
-    @project.build!
-    redirect_to(dashboards_url, :notice => "Build request sent.")
+    if @project.has_running_builds?
+      flash[:error] = "Build already running for #{@project.name} try again in a few minutes."
+      redirect_to(dashboards_url)
+    else
+      @project.build!
+      redirect_to(dashboards_url, :notice => "Build request sent.")
+    end
     authorize! :update, @project
   end
 

@@ -28,9 +28,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'database_cleaner', :git => 'git://github.com/bmabey/database_cleaner.git'
-end
 
-group :zenom do
   # just what I like to use, comment these out if you don't want to use
   # them
   gem 'guard-rspec'

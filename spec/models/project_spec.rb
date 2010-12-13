@@ -59,6 +59,22 @@ describe Project do
         Service::Github.parse(project,load_json('services/github.json'))
       end
 
+      it 'should detect running builds' do
+        project.build!
+        last_build = project.builds.last
+        last_build.build!
+        project.has_running_builds?.should be true
+      end
+
+      it 'should not add another build if one is running' do
+        project.build!
+        last_build = project.builds.last
+        last_build.build! # change state of build to running
+        Delayed::Job.count.should eql 1 
+        project.build!
+        Delayed::Job.count.should eql 1 
+      end
+
       it "should trigger a new build" do
         Build.count.should eql 0
         Delayed::Job.count.should eql 0 

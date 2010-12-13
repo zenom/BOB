@@ -40,11 +40,12 @@ class Project
 
   # run the build
   def build!
-    #Commit.build_git_commit(self) 
-    build = Build.new
-    build.project = self
-    build.save
-    build.delay.perform
+    build = Build.create(:project => self)
+    build.delay.perform unless has_running_builds?
+  end
+
+  def has_running_builds?
+    self.builds.where(:state => :building).count > 0 ? true : false
   end
 
   def total_builds

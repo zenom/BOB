@@ -138,7 +138,16 @@ class Build
     end
 
     Build.delay.clean_old_builds(project.id)
+    Build.delay.run_pending_builds(self.project)
     has_failure? ? build_failed! : build_completed!
+  end
+
+  def self.run_pending_builds(project)
+    found = Build.where(:project_id => project.id, :state => :pending)
+    found.each do |build|
+      build.destroy! unless build == found.last
+      build.delay.perform if build == found.last
+    end
   end
 
   def has_failure?
