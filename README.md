@@ -19,11 +19,10 @@ Currently the code is tested on REE 1.8.7(-head) & 1.9.2-p0.
 In the works
 ------------
 
-The auth branch of BOB is currently unstable and should not currently be used.
-Upon completion it will provide nicer dashboard functionality, as well
-as the ability to have public/private builds with ACL's. This way you can
-provide clients a login to your build server as well as display open source
-projects through the same interface.
+I am currently working on better management for the builds & build
+steps. Including multiple builds & build steps per project to organize
+your builds a little better. I am also working on a hook system to allow
+for more flexibility at each step of the build process.
 
 
 Thanks
