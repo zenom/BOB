@@ -4,7 +4,7 @@ log/*.log
 tmp/**/*
 *.swp
 coverage/*
-
-/.irb-history
-
+.irb-history
 capybara-*.html
+.rvmrc
+Guardfile
