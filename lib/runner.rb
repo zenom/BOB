@@ -7,6 +7,7 @@ class Runner
       "cd #{dir}",
       "#{command}"
     ]
+
     # auto source the rvmrc if one exists in the dir
     commands.insert(1,"source .rvmrc") if File.exists?(File.join(dir, '.rvmrc'))
 

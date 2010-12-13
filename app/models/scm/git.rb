@@ -22,7 +22,7 @@ module Bob
       if build.project.fixed_branch
         branch = build.project.branch_name
       else
-        branch = build.latest_commit.branch.nil? ? 'master' : build.latest_commit.branch
+        branch = build.latest_commit.nil? ? build.project.branch_name : build.latest_commit.branch
       end
       "git clone --branch #{branch} --depth 1 #{build.project.scm_path} #{build.build_dir}"
     end

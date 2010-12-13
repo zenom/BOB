@@ -125,10 +125,10 @@ class Build
       rescue ::RunnerError => e
         # change state to failed
         build_step.output = e.output
-        build_step.save
         build_step.step_failed!
-        break
+        build_step.save
         Rails.logger.debug(e.message)
+        break
       end
     end
 

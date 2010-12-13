@@ -26,4 +26,10 @@ describe Bob::Git do
     command.should eql "git clone --branch #{build.latest_commit.branch} --depth 1 #{build.project.scm_path} #{build.build_dir}"
   end
 
+  it 'should use master if there is no last commit' do
+    build.commits = []
+    command = Bob::Git.checkout(build)
+    command.should eql "git clone --branch master --depth 1 #{build.project.scm_path} #{build.build_dir}"
+  end
+
 end
