@@ -14,6 +14,7 @@ class Service::Github
       commit.files_modified = c.modified.size
       commit.url            = c.url
       commit.branch         = payload.ref.blank? ? 'master' : payload.ref.split("\/").last
+      next if commit.branch == 'gh-pages'
       commit.project_id     = project.id
       commit.save
       commits << commit

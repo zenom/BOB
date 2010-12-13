@@ -2,9 +2,9 @@ $(function() {
 
   $('#project_private').change(function() {
     if($(this).is(':checked')) {
-      alert('yes');
+      // show users area
     } else {
-      alert('no');
+      // hide the users area
     }
   });
 

@@ -6,8 +6,8 @@ class ServiceController < ApplicationController
     payload = JSON.parse(params[:payload])
     project = Project.find(params[:service_id])
     ## add new build and commit
-    Service::Github.parse(project, payload)
-    project.build!
+    commits = Service::Github.parse(project, payload)
+    project.build! if commits.length > 0
     render :text => "OK", :status => 200
   end
 
