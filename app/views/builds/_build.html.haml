@@ -29,6 +29,10 @@
       %br/
       %strong Completed:
       = build.completed_at
+      - if build.completed_at
+        %br/
+        %strong Duration:
+        = distance_of_time_in_words(build.started_at, build.completed_at)
       %br/
       %strong Author:
       = build.latest_commit.nil? ? "waiting" : build.latest_commit.author
