@@ -28,6 +28,9 @@
           /= link_to "Add Source", new_project_path unless new_record?
     / .block_head ends
     .block_content
+      = f.label 'Project Id'
+      = project.id
+      %p
       = f.input :name, :input_html => {:class => :text }
       %p
       = f.input :scm_path, :input_html => {:class => :text }
