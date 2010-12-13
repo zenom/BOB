@@ -86,6 +86,10 @@ class Build
     end
   end
 
+  def branch_name
+    (self.latest_commit.nil? or self.latest_commit.branch.nil?) ? self.project.branch_name : self.latest_commit.branch
+  end
+
   def build_dir
     File.join(Rails.root, 'tmp', 'builds', self.id.to_s)
   end
