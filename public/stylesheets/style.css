@@ -648,7 +648,7 @@ form input.text.date_picker {
 
 form textarea {
 	width: 98%;
-	height: 140px;
+	height: 50px;
 	padding: 5px;
 	background: #fefefe;
 	border: 1px solid #bbb;
@@ -1041,4 +1041,9 @@ img.ajax-start {
 .color31 {
   color: #EE3B3B;
 }
-  
+h2 img {
+	position: relative;
+	margin-bottom: -5px;
+	margin-right: 10px;
+}
+

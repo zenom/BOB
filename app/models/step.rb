@@ -1,11 +1,12 @@
 class Step
   include Mongoid::Document
-  field :name,    :type => String
-  field :command, :type => String
-  field :private, :type => Boolean, :default => false
+  #include ActsAsList::Mongoid
+
+  field :name,            :type => String
+  field :command,         :type => String
   field :process_order,   :type => Integer # the order the command should be run in
 
-  embedded_in :project, :inverse_of => :steps
+  embedded_in :build_config, :inverse_of => :steps
 
   validates_presence_of :name, :command
 

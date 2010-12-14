@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.steps.build
+    #@project.steps.build
+    build_config = @project.build_configs.build
+    build_configs.steps.build
     @project.build_campfire
   end
 

@@ -47,8 +47,6 @@
       %p
         = f.association :users, :collection => User.any_in(:role => ['client', 'admin']), :as => :check_boxes
       %p
-      = f.button :submit, :class => "submit mid"
-      %p
     .bendl
     .bendr
 
@@ -79,30 +77,73 @@
     .block_head
       .bheadl
       .bheadr
-      %h2= "Build Steps"
+      %h2 
+        = image_tag('mail.png', :width => 22, :height => 22) 
+        Email
     .block_content
-      = f.simple_fields_for :steps do |steps|
-        %div.step{:id => steps.object.id.to_s}
-          .step-form
-            = steps.input :name, :input_html => {:class => :text}
-            .pre
-            = steps.error :command
-            = steps.label :command, :required => true
-            = steps.text_area :command, :class => :command 
-          = link_to "Remove Step", project.new_record? ? '#' : delete_step_path(project, :step => steps.object.id), :class => :delete_step
-          %hr
-      %input{:type => 'button', :value => 'New Step', :class => 'submit mid addstep'} 
-      %p
+      %h3 Coming Soon
+      
+
     .bendl
     .bendr
 
+  = f.simple_fields_for :build_configs do |config|
+    .block.config
+      .block_head
+        .bheadl
+        .bheadr
+        %h2 Config
+      .block_content
+        = config.input :name, :input_html => {:class => 'text config_name'}
+        %p
+        = config.label 'Environment Setup (run before each step)'
+        = config.text_area :env_cmd, :class => :command
+        %p
+        = config.simple_fields_for :steps do |step|
+          %div.build-steps
+            %div.build-step
+              %h2{:style => "border-bottom: 1px solid"} Step #1
+              = step.input :name, :input_html => {:class => :text}
+              %p
+              = step.text_area :command, :class => :command
+            %p
+              = link_to 'Add Step', '#', :class => 'add-step'
+      .bendl
+      .bendr
+  = f.button :submit, :class => "submit mid"
+  %p
 :javascript
+    /*
     $(function() {
-      /* loop through commands on load and format them */
       $('.command').each(function() {
         command     = $(this).val().split(/\r\n|\r|\n/);
         parent_div  = $(this).parent().parent();
         pre_area    = parent_div.find('.pre:first');
         pre_area.html(command.join(' && '));
       });
+    });
+    */
+    $(function() {
+      $('.config_name').live('keyup', function() {
+        var config_name = $(this).val();
+        parent_div = $(this).parents()[2];
+        h2 = $(parent_div).find(' .block_head h2:first');
+        h2.html(config_name);
+      });
+
+      $('a.add-step').live('click', function(e) {
+        e.preventDefault();
+        var first = $('.build-step:first').clone();
+        $(this).before('<p></p>');
+        $(this).before(first);
+        $('body').animate({scrollTop: $('body').attr('scrollHeight')}); 
+
+        step = 1;
+        $('.build-step h2').each(function() {
+          $(this).html('Step #' + step);
+          step++;
+        });
+
+      });
+      
     });

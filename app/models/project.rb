@@ -19,7 +19,8 @@ class Project
   references_many :builds, :dependent => :delete
   references_many :commits, :dependent => :delete
   references_many :users, :stored_as => :array, :inverse_of => :projects
-  embeds_many :steps
+  embeds_many     :build_configs
+  #embeds_many :steps
   embeds_one :campfire, :class_name => 'Notifier::Campfire'
 
   validates_presence_of :name

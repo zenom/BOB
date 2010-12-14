@@ -62,5 +62,12 @@ $(function() {
     }
   });
 
+  $('.editable').inlineEdit({
+    save: function(e, data) {
+      e.preventDefault();
+      return "Saved";
+    }
+  });
+
 
 });
