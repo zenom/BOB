@@ -10,19 +10,15 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    #@project.steps.build
-    build_config = @project.build_configs.build
-    build_configs.steps.build
+    @project.build_configs.build
+    ap @project.build_configs.steps
     @project.build_campfire
+
   end
 
   def create
-    user_ids = params[:project][:user_ids]
-    new_uids = []
-    user_ids.each do |id|
-      new_uids << id unless id.blank? 
-    end
-    params[:project][:user_ids] = new_uids
+    params[:project][:user_ids].delete_if {|x| x.blank? }
+
     @project = Project.new(params[:project])
     respond_to do |format|
       if @project.save
@@ -31,9 +27,7 @@ class ProjectsController < ApplicationController
         format.html { render :action => "new" }
       end
     end
-    # hack for some reason it wasn't working with load_and_authorize_resource on new projects
     authorize! :create, @project
-
   end
 
   def destroy
@@ -42,21 +36,13 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    if @project.steps.count == 0
-      @project.steps.build
-    end
     if @project.campfire
       @project.campfire = Notifier::Campfire.new
     end
   end
 
   def update
-    user_ids = params[:project][:user_ids]
-    new_uids = []
-    user_ids.each do |id|
-      new_uids << id unless id.blank? 
-    end
-    params[:project][:user_ids] = new_uids
+    params[:project][:user_ids].delete_if {|x| x.blank? }
 
     respond_to do |format|
       if @project.update_attributes(params[:project])

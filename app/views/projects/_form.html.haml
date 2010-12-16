@@ -96,8 +96,7 @@
       .block_content
         = config.input :name, :input_html => {:class => 'text config_name'}
         %p
-        = config.label 'Environment Setup (run before each step)'
-        = config.text_area :env_cmd, :class => :command
+        = config.input :env_cmd, :as => :text
         %p
         = config.simple_fields_for :steps do |step|
           %div.build-steps
@@ -105,9 +104,10 @@
               %h2{:style => "border-bottom: 1px solid"} Step #1
               = step.input :name, :input_html => {:class => :text}
               %p
-              = step.text_area :command, :class => :command
+              = config.input :command, :as => :text
             %p
               = link_to 'Add Step', '#', :class => 'add-step'
+
       .bendl
       .bendr
   = f.button :submit, :class => "submit mid"
@@ -124,6 +124,16 @@
     });
     */
     $(function() {
+
+      // update the config names on load
+      $('.config_name').each(function() {
+        var config_name = $(this).val();
+        parent_div = $(this).parents()[2];
+        h2 = $(parent_div).find(' .block_head h2:first');
+        (config_name != '') ? h2.html(config_name) : 'CONFIG'
+      });
+
+      // update the config on change/keyup
       $('.config_name').live('keyup', function() {
         var config_name = $(this).val();
         parent_div = $(this).parents()[2];

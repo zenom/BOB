@@ -20,16 +20,16 @@ class Project
   references_many :commits, :dependent => :delete
   references_many :users, :stored_as => :array, :inverse_of => :projects
   embeds_many     :build_configs
-  #embeds_many :steps
   embeds_one :campfire, :class_name => 'Notifier::Campfire'
 
   validates_presence_of :name
   validates_presence_of :scm_path
   validates_presence_of :keep_build_count
 
-  validates_associated :steps
   validates_associated :campfire
-  accepts_nested_attributes_for :steps
+  validates_associated :build_configs
+
+  accepts_nested_attributes_for :build_configs
   accepts_nested_attributes_for :campfire
 
 

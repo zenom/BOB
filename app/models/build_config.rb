@@ -6,6 +6,10 @@ class BuildConfig
   field :env_cmd,   :type => String
 
   embeds_many :steps
-  embedded_in :project, :inverse_of => :configs
+  embedded_in :project, :inverse_of => :build_configs
 
+  validates_presence_of :name, :env_cmd
+
+  validates_associated :steps
+  accepts_nested_attributes_for :steps
 end
