@@ -138,7 +138,7 @@ class Build
     end
 
     Build.delay.clean_old_builds(project.id)
-    Build.delay.run_pending_builds(self.project)
+    #Build.delay.run_pending_builds(self.project)
     has_failure? ? build_failed! : build_completed!
   end
 
