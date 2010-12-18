@@ -9,14 +9,12 @@ class Build
   field :state,         :type => String
   field :started_at,    :type => Time
   field :completed_at,  :type => Time
-  field :build_num,     :type => Integer # used for better gte/lte sorting
 
   referenced_in     :project
   references_many   :commits, :inverse_of => :build, :dependent => :destroy
   references_many   :build_steps, :inverse_of => :build, :dependent => :destroy
 
   before_create :associate_commits
-  before_create :generate_buildnum
   after_destroy :remove_build_dir
 
   # on state change, handle running hooks
@@ -72,12 +70,6 @@ class Build
 
     # do the hooks
     self.project.campfire.send_success(self) if self.project.campfire.post_message?
-  end
-
-  def generate_buildnum
-    deleted_builds  = Build.deleted.count
-    current_builds  = Build.count
-    self.build_num  = (deleted_builds + current_builds) + 1 
   end
 
   def associate_commits
@@ -138,12 +130,14 @@ class Build
     end
 
     Build.delay.clean_old_builds(project.id)
+    Rails.logger.debug("[BOB] checking for pending builds....")
     Build.delay.run_pending_builds(self.project)
     has_failure? ? build_failed! : build_completed!
   end
 
   def self.run_pending_builds(project)
     found = Build.where(:project_id => project.id, :state => :pending)
+    Rails.logger.debug("[BOB] found #{found.count} pending builds...")
     found.each do |build|
       build.destroy! unless build == found.last
       build.delay.perform if build == found.last
@@ -187,7 +181,6 @@ class Build
 
     {
       :id => self.id,
-      :build_num => self.build_num,
       :project_name => self.project.name,
       :project_id => self.project.id,
       :project_slug => self.project.slug,
@@ -207,7 +200,7 @@ class Build
     def clean_old_builds(project)
       project = Project.find(project)
       build_count = project.keep_build_count ||= 10
-      old_builds = self.order_by(:build_num.desc, :created_at.desc).skip(build_count)
+      old_builds = self.order_by(:created_at.desc).skip(build_count)
       old_builds.each do |build|
         build.destroy
       end
