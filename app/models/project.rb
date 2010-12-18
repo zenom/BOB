@@ -41,8 +41,7 @@ class Project
   # run the build
   def build!
     build = Build.create(:project => self)
-    #build.delay.perform unless has_running_builds?
-    build.delay.perform
+    build.delay.perform unless has_running_builds?
   end
 
   def has_running_builds?

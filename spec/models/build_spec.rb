@@ -93,13 +93,6 @@ describe Build do
     subject.commits.last.should eql subject.latest_commit 
   end
 
-  it 'should generate proper build numbers' do
-    10.times { Fabricate(:build, :project => project) } 
-    2.times { Build.last.destroy }
-    build = Fabricate(:build, :project => project)
-    build.build_num.should eql 11
-  end
-
   it 'should run pending builds' do
     3.times { |i| Fabricate(:build, :project => project, :created_at => Time.now.utc + i.minutes) }
     project.builds.count.should eql 3
