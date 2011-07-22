@@ -33,7 +33,6 @@ feature "Sessions" do
   end
 
   context "log out" do
-
     scenario "should be able to log out" do
       log_in(user)
       page.should have_content("Logout")

@@ -1,7 +1,9 @@
+
 require 'spec_helper'
 
 describe Project do
-  
+
+
   # fields, referenes, validations
   it { should have_field(:name).of_type(String) } 
   it { should have_field(:scm_type).of_type(String) }
